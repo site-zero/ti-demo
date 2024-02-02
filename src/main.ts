@@ -1,4 +1,4 @@
-import { I18n, I18nSet, MessageMap, updateInstalledComponentsLangs } from "ti";
+import { I18n, I18nSet, MessageMap, updateInstalledComponentsLangs } from "tijs";
 import { createApp } from "vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 import TiDemoApp from "./TiDemoApp.vue";
@@ -6,7 +6,7 @@ import PageDetail from "./components/detail/PageDetail.vue";
 import NavCom from "./components/nav/NavCom.vue";
 import en_us from "./i18n/en-us.json";
 import zh_cn from "./i18n/zh-cn.json";
-import "ti/style.css";
+import "tijs/style.css";
 import "./style.scss";
 
 let cn = zh_cn as MessageMap;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TiIcon, tiCheckComponent, TiPlayground } from "ti";
+import { TiIcon, tiCheckComponent, TiPlayground } from "tijs";
 import { computed } from "vue";
 
 const emit = defineEmits(["toggle:theme_color"]);
@@ -61,7 +61,7 @@ const ThemeColorIcon = computed(() => {
 </template>
 
 <style scoped lang="scss">
-@use "ti/scss" as *;
+@use "tijs/scss" as *;
 
 .page-detail {
   @include flex-align-v-nowrap;
