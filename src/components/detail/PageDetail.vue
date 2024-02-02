@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { TiIcon, tiCheckComponent } from "ti";
+import { TiIcon, tiCheckComponent, TiPlayground } from "ti";
 import { computed } from "vue";
-import Playground from "./Playground.vue";
 
 const emit = defineEmits(["toggle:theme_color"]);
 /*-------------------------------------------------------
@@ -56,11 +55,8 @@ const ThemeColorIcon = computed(() => {
         <TiIcon class="s24" :value="ThemeColorIcon" />
       </a>
     </h3>
-    <Playground
-      :comType="comType"
-      :example="example"
-      :exampleAsRouterLink="true"
-    />
+    <TiPlayground :comType="comType" :example="example"
+      :exampleAsRouterLink="true" />
   </div>
 </template>
 
@@ -71,20 +67,20 @@ const ThemeColorIcon = computed(() => {
   @include flex-align-v-nowrap;
   padding: 0.2rem;
 
-  > h3 {
+  >h3 {
     @include flex-align($ai: center);
     padding: SZ(10);
     margin: 0;
 
-    > .ti-icon {
+    >.ti-icon {
       margin-right: SZ(12);
     }
 
-    > span {
+    >span {
       flex: 1 1 auto;
     }
 
-    > a {
+    >a {
       color: inherit;
       text-decoration: none;
 
@@ -94,7 +90,7 @@ const ThemeColorIcon = computed(() => {
     }
   }
 
-  > .demo-playground {
+  >.demo-playground {
     flex: 1 1 auto;
   }
 }
