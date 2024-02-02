@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { BUS_KEY } from "tijs";
+import { BUS_KEY } from "@site0/tijs";
 import { onUnmounted, provide, ref, watch } from "vue";
-import { CssUtils, Num, Store, createAppBus, watchAppResize } from "tijs";
+import { CssUtils, Num, Store, createAppBus, watchAppResize } from "@site0/tijs";
 
 /*-------------------------------------------------------
 

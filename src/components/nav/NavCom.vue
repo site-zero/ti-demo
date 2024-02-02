@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TiComInfo, TiComRace, TiIcon, tiFindComponents, I18n } from "tijs";
+import { TiComInfo, TiComRace, TiIcon, tiFindComponents, I18n } from "@site0/tijs";
 import _ from "lodash";
 import { computed } from "vue";
 
@@ -82,7 +82,7 @@ const NavItemGroups = computed(() => {
 </template>
 
 <style scoped lang="scss">
-@use "tijs/scss" as *;
+@use "@site0/tijs/scss" as *;
 
 nav {
   padding: SZ(4);
