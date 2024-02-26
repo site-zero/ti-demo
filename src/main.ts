@@ -1,13 +1,18 @@
-import { I18n, I18nSet, MessageMap, updateInstalledComponentsLangs } from "@site0/tijs";
-import { createApp } from "vue";
-import { createRouter, createWebHashHistory } from "vue-router";
-import TiDemoApp from "./TiDemoApp.vue";
-import PageDetail from "./components/detail/PageDetail.vue";
-import NavCom from "./components/nav/NavCom.vue";
-import en_us from "./i18n/en-us.json";
-import zh_cn from "./i18n/zh-cn.json";
-import "@site0/tijs/style.css";
-import "./style.scss";
+import {
+  I18n,
+  I18nSet,
+  MessageMap,
+  updateInstalledComponentsLangs,
+} from '@site0/tijs';
+import { createApp } from 'vue';
+import { createRouter, createWebHashHistory } from 'vue-router';
+import TiDemoApp from './TiDemoApp.vue';
+import PageDetail from './components/detail/PageDetail.vue';
+import NavCom from './components/nav/NavCom.vue';
+import en_us from './i18n/en-us.json';
+import zh_cn from './i18n/zh-cn.json';
+import '@site0/tijs/style.scss';
+import './style.scss';
 
 let cn = zh_cn as MessageMap;
 let en = en_us as MessageMap;
@@ -19,9 +24,9 @@ const app_i18ns = {
   zh_cn: cn,
   en_us: en,
   zh_hk: cn,
-  en_uk: en
+  en_uk: en,
 } as I18nSet;
-let lang = "zh-cn";
+let lang = 'zh-cn';
 let langKey = I18n.toLangKey(lang);
 I18n.putAll(app_i18ns[langKey]);
 updateInstalledComponentsLangs(langKey);
@@ -39,22 +44,22 @@ let router = createRouter({
   history: createWebHashHistory(),
   routes: [
     {
-      path: "/:comType?/:example?",
+      path: '/:comType?/:example?',
       components: {
         chute: NavCom,
-        arena: PageDetail
+        arena: PageDetail,
       },
       props: {
         chute: (route) => ({
-          current: route.params.comType || "TiUnknown"
+          current: route.params.comType || 'TiUnknown',
         }),
         arena: (route) => ({
-          comType: route.params.comType || "TiUnknown",
-          example: route.params.example
-        })
-      }
-    }
-  ]
+          comType: route.params.comType || 'TiUnknown',
+          example: route.params.example,
+        }),
+      },
+    },
+  ],
 });
 
 //
@@ -64,4 +69,4 @@ let app = createApp(TiDemoApp);
 //app.config.devtools = true;
 app.use(router);
 
-app.mount("#app");
+app.mount('#app');
