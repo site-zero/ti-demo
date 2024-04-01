@@ -41,12 +41,13 @@
       if (comInfo.asInner) {
         continue;
       }
-      let it = {
+      let current = comInfo.name == props.current;
+      let it: NavItem = {
         ...comInfo,
-      } as NavItem;
-      it.current = it.name == props.current;
-      it.className = it.current ? 'is-current' : undefined;
-      it.href = `/${it.name}`;
+        current,
+        className: current ? 'is-current' : undefined,
+        href: `/${comInfo.name}`,
+      };
       let items = itemMap[it.race];
       if (!items) {
         items = [];
