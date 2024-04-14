@@ -2,20 +2,30 @@ import {
   I18n,
   I18nSet,
   MessageMap,
+  TiComSet,
+  tiPutComponents,
   updateInstalledComponentsLangs,
 } from '@site0/tijs';
+import '@site0/tijs/style.scss';
 import { createApp } from 'vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
 import TiDemoApp from './TiDemoApp.vue';
+import { DemoModelInfo } from './components/demo-model/demo-model-index';
 import PageDetail from './components/detail/PageDetail.vue';
 import NavCom from './components/nav/NavCom.vue';
 import en_us from './i18n/en-us.json';
 import zh_cn from './i18n/zh-cn.json';
-import '@site0/tijs/style.scss';
 import './style.scss';
-
 let cn = zh_cn as MessageMap;
 let en = en_us as MessageMap;
+
+//
+// 准备自定义控件
+//
+const demos = {
+  DemoModel: DemoModelInfo,
+} as TiComSet;
+tiPutComponents(demos);
 
 //
 // 准备多国语言

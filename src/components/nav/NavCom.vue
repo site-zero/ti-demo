@@ -1,10 +1,10 @@
 <script setup lang="ts">
   import {
+    I18n,
     TiComInfo,
     TiComRace,
     TiIcon,
     tiFindComponents,
-    I18n,
   } from '@site0/tijs';
   import _ from 'lodash';
   import { computed } from 'vue';
@@ -78,15 +78,17 @@
 
 <template>
   <nav>
-    <section v-for="grp in NavItemGroups">
+    <template v-for="grp in NavItemGroups">
       <h3>{{ grp.text }}</h3>
-      <div v-for="it in grp.items" :class="it.className" class="nav-item">
-        <RouterLink :to="it.href">
-          <TiIcon :value="it.icon || 'fas-question'" />
-          <span>{{ I18n.text(it.text) }}</span>
-        </RouterLink>
-      </div>
-    </section>
+      <section>
+        <div v-for="it in grp.items" :class="it.className" class="nav-item">
+          <RouterLink :to="it.href">
+            <TiIcon class="s16" :value="it.icon || 'fas-question'" />
+            <span>{{ I18n.text(it.text) }}</span>
+          </RouterLink>
+        </div>
+      </section>
+    </template>
   </nav>
 </template>
 
@@ -99,25 +101,40 @@
     line-height: 1.4em;
   }
 
+  h3 {
+    border-bottom: 1px solid var(--ti-color-border-shallow);
+    margin: 0;
+    padding: 0.2em;
+    font-size: SZ(10);
+    color: var(--ti-color-track);
+  }
+
   section {
     padding: SZ(10) 0;
-
-    h3 {
-      border-bottom: 1px solid var(--ti-color-border-shallow);
-      margin: 0;
-      padding: 0.2em;
-      font-size: SZ(10);
-      color: var(--ti-color-track);
-    }
+    @include flex-align($ai: stretch, $ac: stretch);
 
     div.nav-item {
+      width: SZ(48);
+      margin: SZ(2);
       > a {
-        @include flex-align-nowrap;
-        padding: 0.5em 0.6em;
+        @include flex-align-v-nowrap($ai: center);
+        text-align: center;
         cursor: pointer;
-
-        > .ti-icon {
-          margin-right: SZ(4);
+        padding:SZ(6) SZ(4);
+        border-radius: SZ(2);
+        span {
+          display: block;
+          font-size: 0.8em;
+          white-space: nowrap;
+          width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        &:hover {
+          text-decoration: none;
+          span {
+            text-decoration: underline;
+          }
         }
       }
 
@@ -125,7 +142,6 @@
         font-weight: bold;
         background-color: var(--ti-color-selected);
         color: var(--ti-color-selected-f);
-        border-left: 3px solid var(--ti-color-primary);
         cursor: default;
       }
     }
