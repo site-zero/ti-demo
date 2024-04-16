@@ -10,7 +10,7 @@ import '@site0/tijs/style.scss';
 import { createApp } from 'vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
 import TiDemoApp from './TiDemoApp.vue';
-import { DemoModelInfo } from './components/demo-model/demo-model-index';
+import { DemoModalInfo } from './components/demo-model/demo-modal-index';
 import PageDetail from './components/detail/PageDetail.vue';
 import NavCom from './components/nav/NavCom.vue';
 import en_us from './i18n/en-us.json';
@@ -23,7 +23,7 @@ let en = en_us as MessageMap;
 // 准备自定义控件
 //
 const demos = {
-  DemoModel: DemoModelInfo,
+  DemoModal: DemoModalInfo,
 } as TiComSet;
 tiPutComponents(demos);
 

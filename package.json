@@ -11,7 +11,7 @@
   "dependencies": {
     "json5": "^2.2.3",
     "lodash": "^4.17.21",
-    "vue": "^3.4.18",
+    "vue": "^3.4.22",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
