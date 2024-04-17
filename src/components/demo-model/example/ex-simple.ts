@@ -11,7 +11,7 @@ function genSnippet(position: string): DialogItem {
       position,
       comType: 'TiHtmlSnippet',
       comConf: {
-        content: 'Hello',
+        content: `<strong>Hello</strong>: <em style='color:red'>${position}</em>`,
       } as Vars,
     } as AppModalProps,
   } as DialogItem;
