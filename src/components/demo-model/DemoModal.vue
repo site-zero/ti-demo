@@ -7,7 +7,7 @@
   }>();
 
   async function OnOpenDialog(dia: DialogItem) {
-    let re = openAppModal(dia.dialog);
+    let re = await openAppModal(dia.dialog);
     console.log(`Dialog[${dia.title}]`, re);
   }
 </script>
