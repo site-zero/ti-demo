@@ -1,15 +1,17 @@
 import { TiComInfo, TiComRace } from '@site0/tijs';
 import { App } from 'vue';
 import DemoModal from './DemoModal.vue';
-import { simple } from './example/index.ts';
+import { alerts, simple } from './example/index.ts';
 
 const COM_TYPE = 'DemoModal';
 
 let en = {
   'com-name': 'Demo Model',
+  'example-alert': 'Alert',
 };
 let cn = {
   'com-name': '模式框演示',
+  'example-alert': '消息框',
 };
 
 const DemoModalInfo: TiComInfo = {
@@ -28,7 +30,7 @@ const DemoModalInfo: TiComInfo = {
     app.component(COM_TYPE, DemoModal);
   },
   defaultProps: 'simple',
-  exampleProps: [simple],
+  exampleProps: [simple, alerts],
 };
 
 export { DemoModal, DemoModalInfo };

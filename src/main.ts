@@ -10,7 +10,7 @@ import '@site0/tijs/style.scss';
 import { createApp } from 'vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
 import TiDemoApp from './TiDemoApp.vue';
-import { DemoModalInfo } from './components/demo-model/demo-modal-index';
+import { DemoModalInfo } from './components/demo-modal/demo-modal-index';
 import PageDetail from './components/detail/PageDetail.vue';
 import NavCom from './components/nav/NavCom.vue';
 import en_us from './i18n/en-us.json';

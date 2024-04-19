@@ -1,14 +1,21 @@
 <script setup lang="ts">
-  import { openAppModal } from '@site0/tijs';
-  import { DialogItem } from './example/ex-types';
+  import { Alert, openAppModal } from '@site0/tijs';
+import { DialogItem } from './example/ex-types';
 
   const props = defineProps<{
     dialogs: DialogItem[];
   }>();
 
   async function OnOpenDialog(dia: DialogItem) {
-    let re = await openAppModal(dia.dialog);
-    console.log(`Dialog[${dia.title}]`, re);
+    // 普通对话框
+    if (dia.dialog) {
+      let re = await openAppModal(dia.dialog);
+      console.log(`Dialog[${dia.title}]`, re);
+    }
+    // 消息框
+    else if (dia.alert) {
+      await Alert(dia.alert.msg, dia.alert.options);
+    }
   }
 </script>
 <template>
