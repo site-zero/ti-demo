@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { Alert, openAppModal } from '@site0/tijs';
-import { DialogItem } from './example/ex-types';
+  import { DialogItem } from './example/ex-types';
 
   const props = defineProps<{
     dialogs: DialogItem[];
@@ -22,7 +22,8 @@ import { DialogItem } from './example/ex-types';
   <div class="demo-modal">
     <div
       v-for="dia in props.dialogs"
-      class="demo-modal-item"
+      class="demo-modal-item active-reverse"
+      :class="`box-as-${dia.type || 'info'}`"
       @click="OnOpenDialog(dia)">
       <div class="as-text">{{ dia.title }}</div>
       <div class="as-brief" v-if="dia.brief">{{ dia.brief }}</div>
@@ -42,6 +43,18 @@ import { DialogItem } from './example/ex-types';
 
   .demo-modal-item {
     @include flex-center;
-    @include button(primary);
+    cursor: pointer;
+    padding: SZ(8) SZ(12);
+    border-radius: SZ(4);
+    user-select: none;
+    font-size: 0.9em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    .as-text {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
   }
 </style>

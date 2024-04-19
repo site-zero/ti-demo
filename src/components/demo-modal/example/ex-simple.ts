@@ -11,6 +11,7 @@ export default {
         let title = _.upperFirst(_.camelCase(position));
         return {
           title,
+          type,
           dialog: {
             icon: 'zmdi-notifications',
             title: `${title} Dialog`,

@@ -1,8 +1,9 @@
-import { AlertOptions, AppModalProps, FuncA2, LogicType } from '@site0/tijs';
+import { AlertOptions, AppModalProps, LogicType } from '@site0/tijs';
 
 export type DialogItem = {
   title: string;
-  brief: string;
+  brief?: string;
+  type: LogicType;
   dialog?: AppModalProps;
   alert?: {
     msg: string;
