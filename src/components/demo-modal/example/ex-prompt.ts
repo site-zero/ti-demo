@@ -45,6 +45,8 @@ export default {
               showMask: true,
               clickMaskToClose: true,
               bodyIcon,
+              value: position,
+              placeholder: position,
             },
           },
         } as DialogItem;
