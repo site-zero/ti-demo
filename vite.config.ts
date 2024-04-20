@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [vue()],
   build: {
     // 单位是 KB
-    chunkSizeWarningLimit: 800
+    chunkSizeWarningLimit: 2000
   }
 });

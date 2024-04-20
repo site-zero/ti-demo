@@ -1,8 +1,11 @@
 import {
   I18n,
   I18nSet,
+  LogLevel,
   MessageMap,
   TiComSet,
+  addLogger,
+  setDefaultLogLevel,
   tiPutComponents,
   updateInstalledComponentsLangs,
 } from '@site0/tijs';
@@ -19,6 +22,9 @@ import './style.scss';
 let cn = zh_cn as MessageMap;
 let en = en_us as MessageMap;
 
+setDefaultLogLevel(LogLevel.DEBUG);
+addLogger('ti', LogLevel.DEBUG);
+addLogger('Ti', LogLevel.DEBUG);
 //
 // 准备自定义控件
 //
