@@ -7,8 +7,8 @@ import { DialogItem, genDialogItems } from './ex-types';
 const chance = new Chance();
 
 export default {
-  name: 'alert',
-  text: 'i18n:demo-modal-example-alert',
+  name: 'prompt',
+  text: 'i18n:demo-modal-example-prompt',
   comConf: {
     dialogs: genDialogItems(
       (position: string, type: LogicType = 'info'): DialogItem => {
@@ -16,10 +16,10 @@ export default {
         //-----------------------------------------
         let msg =
           position.indexOf('-') > 0
-            ? `Show Alert In Position: ${title}::
+            ? `Show prompt In Position: ${title}::
               -----------------<This is Text Content>-------------------
               ${chance.paragraph()}`
-            : `Show Alert In Position: ${title}`;
+            : `Show prompt In Position: ${title}`;
         //-----------------------------------------
         let bodyIcon = {
           'left-top': undefined,
@@ -33,14 +33,11 @@ export default {
           'bottom-right': 'zmdi-whatsapp',
           'free': 'zmdi-yahoo',
         }[position];
-        if (type != "info") {
-          bodyIcon = undefined;
-        }
         //-----------------------------------------
         return {
           title,
           type,
-          alert: {
+          prompt: {
             msg,
             options: {
               type,

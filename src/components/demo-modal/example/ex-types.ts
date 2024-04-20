@@ -1,4 +1,10 @@
-import { AlertOptions, AppModalProps, LogicType } from '@site0/tijs';
+import {
+  AlertOptions,
+  AppModalProps,
+  ConfirmOptions,
+  LogicType,
+  PromptOptions,
+} from '@site0/tijs';
 
 export type DialogItem = {
   title: string;
@@ -8,6 +14,14 @@ export type DialogItem = {
   alert?: {
     msg: string;
     options: AlertOptions;
+  };
+  confirm?: {
+    msg: string;
+    options: ConfirmOptions;
+  };
+  prompt?: {
+    msg: string;
+    options: PromptOptions;
   };
 };
 
