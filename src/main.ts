@@ -7,6 +7,7 @@ import {
   addLogger,
   setDefaultLogLevel,
   tiPutComponents,
+  tidyLogger,
   updateInstalledComponentsLangs,
 } from '@site0/tijs';
 import '@site0/tijs/style.scss';
@@ -25,6 +26,8 @@ let en = en_us as MessageMap;
 setDefaultLogLevel(LogLevel.DEBUG);
 addLogger('ti', LogLevel.DEBUG);
 addLogger('Ti', LogLevel.DEBUG);
+addLogger('TiTable.resizing', LogLevel.INFO);
+tidyLogger()
 //
 // 准备自定义控件
 //
