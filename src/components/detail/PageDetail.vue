@@ -52,7 +52,7 @@
 </script>
 
 <template>
-  <div class="page-detail">
+  <div class="page-detail cover-parent">
     <h3>
       <TiIcon :value="CurrentCom.icon" class="s32" />
       <span>{{ CurrentCom.toString() }}</span>
