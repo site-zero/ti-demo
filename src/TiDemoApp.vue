@@ -68,7 +68,9 @@
 </script>
 
 <template>
-  <TiMainFrame mode="Z">
+  <TiMainFrame
+    mode="Z"
+    :keep-frame="{ keepAt: 'Ti-Demo-MainFrame', keepMode: 'local' }">
     <!--插槽: 顶栏-->
     <template v-slot:sky>
       <h1 class="demo-sky">Ti Demo App</h1>
