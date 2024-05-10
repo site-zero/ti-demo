@@ -1,13 +1,14 @@
 <script setup lang="ts">
-  import { BUS_KEY, TiMainFrame } from '@site0/tijs';
-  import { onUnmounted, provide, ref, watch } from 'vue';
   import {
+    BUS_KEY,
     CssUtils,
     Num,
+    TiMainFrame,
     TiStore,
     createAppBus,
     watchAppResize,
   } from '@site0/tijs';
+  import { onUnmounted, provide, ref, watch } from 'vue';
 
   /*-------------------------------------------------------
 
