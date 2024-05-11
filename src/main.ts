@@ -5,6 +5,7 @@ import {
   MessageMap,
   TiComSet,
   addLogger,
+  installTiCoreI18n,
   setDefaultLogLevel,
   tiPutComponents,
   tidyLogger,
@@ -48,7 +49,8 @@ const app_i18ns = {
 let lang = 'zh-cn';
 let langKey = I18n.toLangKey(lang);
 I18n.putAll(app_i18ns[langKey]);
-updateInstalledComponentsLangs(langKey);
+installTiCoreI18n(lang, true);
+//updateInstalledComponentsLangs(langKey);
 
 // setEnv('comDefaultProps',{
 //   TiLabel: {
