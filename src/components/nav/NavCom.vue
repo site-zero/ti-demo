@@ -1,13 +1,15 @@
 <script setup lang="ts">
   import {
+    CssUtils,
     I18n,
     TiComInfo,
     TiComRace,
     TiIcon,
+    Vars,
     tiFindComponents,
   } from '@site0/tijs';
   import _ from 'lodash';
-  import { computed } from 'vue';
+  import { computed, ref } from 'vue';
 
   type NavProps = {
     current?: string;
@@ -17,7 +19,7 @@
 
   interface NavItem extends TiComInfo {
     icon: string;
-    className?: string;
+    className?: Vars;
     current?: boolean;
     href: string;
   }
@@ -29,6 +31,7 @@
   };
 
   let allComs = tiFindComponents();
+  const _com_count = ref(0);
 
   const NavItemGroups = computed(() => {
     // 准备归纳
@@ -37,15 +40,22 @@
     };
 
     // 归纳
+    _com_count.value = 0;
     for (let comInfo of allComs) {
       if (comInfo.asInner) {
         continue;
       }
+      _com_count.value += 1;
       let current = comInfo.name == props.current;
       let it: NavItem = {
         ...comInfo,
         current,
-        className: current ? 'is-current' : undefined,
+        className: CssUtils.mergeClassName(
+          {
+            'is-current': current,
+          },
+          _.map(comInfo.tags, (tag) => `is-${tag}`)
+        ),
         href: `/${comInfo.name}`,
       };
       let items = itemMap[it.race];
@@ -79,16 +89,19 @@
 <template>
   <nav>
     <template v-for="grp in NavItemGroups">
-      <h3>{{ grp.text }}</h3>
+      <h3>
+        {{ grp.text }} <em> x {{ grp.items.length }}</em>
+      </h3>
       <section>
         <div v-for="it in grp.items" :class="it.className" class="nav-item">
           <RouterLink :to="it.href">
-            <TiIcon class="s16" :value="it.icon || 'fas-question'" />
+            <TiIcon class="s24" :value="it.icon || 'fas-question'" />
             <span>{{ I18n.text(it.text) }}</span>
           </RouterLink>
         </div>
       </section>
     </template>
+    <aside>Total {{ _com_count }} Components</aside>
   </nav>
 </template>
 
@@ -96,9 +109,18 @@
   @use '@site0/tijs/scss' as *;
 
   nav {
-    padding: SZ(4);
-    font-size: SZ(12);
+    position: relative;
+    padding: 0.4em;
+    font-size: var(--ti-fontsz-m);
     line-height: 1.4em;
+    > aside {
+      @include pos-abs($t: 0, $r: 0, $h: 2em);
+      @include flex-center($jc: flex-start);
+      @include font-fixed;
+      font-size: 9px;
+      padding: 0 0.2em;
+      color: var(--ti-color-disable);
+    }
   }
 
   h3 {
@@ -107,6 +129,11 @@
     padding: 0.2em;
     font-size: SZ(10);
     color: var(--ti-color-track);
+    em {
+      font-style: normal;
+      font-weight: normal;
+      opacity: 0.6;
+    }
   }
 
   section {
@@ -114,18 +141,18 @@
     @include flex-align($ai: stretch, $ac: stretch);
 
     div.nav-item {
-      width: SZ(48);
-      margin: SZ(2);
+      width: 5em;
+      margin: 0;
       > a {
         @include flex-align-v-nowrap($ai: center);
         text-align: center;
         cursor: pointer;
-        padding:SZ(6) SZ(4);
-        border-radius: SZ(2);
+        padding: 0.6em 0;
+        border-radius: var(--ti-measure-r-s);
         span {
           display: block;
           font-size: 0.8em;
-          white-space: nowrap;
+          //white-space: nowrap;
           width: 100%;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -143,6 +170,13 @@
         background-color: var(--ti-color-selected);
         color: var(--ti-color-selected-f);
         cursor: default;
+      }
+
+      &.is-ing > a {
+        color: var(--ti-color-track);
+        > * {
+          opacity: 0.8;
+        }
       }
     }
   }
