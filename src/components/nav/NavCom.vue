@@ -173,6 +173,14 @@
       }
 
       &.is-ing > a {
+        color: var(--ti-color-warn);
+        > * {
+          opacity: 0.8;
+        }
+      }
+
+      
+      &.is-scaffold > a {
         color: var(--ti-color-track);
         > * {
           opacity: 0.8;
