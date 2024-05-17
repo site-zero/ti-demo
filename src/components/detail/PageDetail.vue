@@ -107,7 +107,7 @@
 
     > blockquote {
       background-color: var(--ti-color-bar);
-      margin: 0 1em;
+      margin: 0 0 1px 0;
       padding: 0.3em;
       border-radius: 0.2em;
       ul {
