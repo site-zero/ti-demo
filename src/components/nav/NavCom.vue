@@ -142,12 +142,12 @@
 
     div.nav-item {
       width: 5em;
-      margin: 0;
+      margin: 0.1em;
       > a {
         @include flex-align-v-nowrap($ai: center);
         text-align: center;
         cursor: pointer;
-        padding: 0.6em 0;
+        padding: 0.4em 0;
         border-radius: var(--ti-measure-r-s);
         span {
           display: block;
