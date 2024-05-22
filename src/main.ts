@@ -57,41 +57,49 @@ installTiCoreI18n(lang, true);
 //     value: "BBBBBB"
 //   }
 // })
+function makeDictQuery(path: string) {
+  return async (hint: string, signal?: AbortSignal) =>
+    new Promise<any[]>((resolve, reject) => {
+      let url = `https://t.site0.xyz/a/lookup/${path}&hint=${encodeURIComponent(
+        hint
+      )}`;
+      fetch(url, {
+        signal,
+      })
+        .then((resp) => {
+          resp
+            .json()
+            .then((reo) => {
+              if (reo.ok) {
+                resolve(reo.data);
+              } else {
+                reject(reo);
+              }
+            })
+            .catch(reject);
+        })
+        .catch(reject);
+    });
+}
+
+function createDemoDict(name: string, path: string) {
+  Dicts.getOrCreate(
+    Dicts.makeDictOptions({
+      data: async () =>
+        new Promise<any[]>((resolve) => {
+          resolve([]);
+        }),
+      query: makeDictQuery(path),
+    }),
+    name
+  );
+}
 
 //
 // 准备字典
 //
-Dicts.getOrCreate(
-  Dicts.makeDictOptions({
-    data: async () =>
-      new Promise<any[]>((resolve) => {
-        resolve([]);
-      }),
-    query: async (hint: string, signal?: AbortSignal) =>
-      new Promise<any[]>((resolve, reject) => {
-        let url = `https://t.site0.xyz/a/lookup/test?min=4&max=10&hint=${encodeURIComponent(
-          hint
-        )}`;
-        fetch(url, {
-          signal,
-        })
-          .then((resp) => {
-            resp
-              .json()
-              .then((reo) => {
-                if (reo.ok) {
-                  resolve(reo.data);
-                } else {
-                  reject(reo);
-                }
-              })
-              .catch(reject);
-          })
-          .catch(reject);
-      }),
-  }),
-  'hello'
-);
+createDemoDict('hello', '/test?min=4&max=10&len=100');
+createDemoDict('hello100', '/test?min=90&max=100&len=100');
 
 //
 // 准备路由
