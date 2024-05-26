@@ -2,6 +2,7 @@
   import {
     BUS_KEY,
     CssUtils,
+    DateTime,
     Num,
     TiMainFrame,
     TiStore,
@@ -9,29 +10,40 @@
     watchAppResize,
   } from '@site0/tijs';
   import { onUnmounted, provide, ref, watch } from 'vue';
+  import JSON5 from 'json5';
 
-  /*-------------------------------------------------------
-
-                   全局消息总线
-
--------------------------------------------------------*/
+  //-------------------------------------------------------
+  //
+  //               全局消息总线
+  //
+  //-------------------------------------------------------
+  let _bug_msg = ref<string>();
   let bus = createAppBus(onUnmounted);
+  bus.on('*', (msg) => {
+    let { srcBus, name, data } = msg;
+    let str = `总线[${srcBus}]收到消息: '${name}'`;
+    // if ('app-resize' != name) {
+    //   console.log(str, data);
+    // }
+    let now = DateTime.format(new Date());
+    _bug_msg.value = `${now} ${str} : ${JSON5.stringify(data)}`;
+  });
   provide(BUS_KEY, bus);
   watchAppResize(bus);
-  /*-------------------------------------------------------
-
-                      Data
-
--------------------------------------------------------*/
+  //-------------------------------------------------------
+  //
+  //                    Data
+  //
+  //-------------------------------------------------------
   let _TC_key = 'Ti-DemoApp-Theme-Color';
   let _TC_dft = 'auto-color-mode';
   let tc_val = TiStore.local.getString(_TC_key, 'auto-color-mode');
   const theme_color = ref(tc_val);
-  /*-------------------------------------------------------
-
-                   Methods
-
--------------------------------------------------------*/
+  //-------------------------------------------------------
+  //
+  //                  Methods
+  //
+  //-------------------------------------------------------
   function ToggleThemeColorMode() {
     let colors = ['light', 'dark', 'auto-color-mode'];
     let index = colors.indexOf(theme_color.value);
@@ -52,11 +64,11 @@
     let html = document.documentElement;
     html.className = CssUtils.joinClassNames(klass);
   }
-  /*-------------------------------------------------------
-
-                   Methods
-
--------------------------------------------------------*/
+  //-------------------------------------------------------
+  //
+  //                  Life Hook
+  //
+  //-------------------------------------------------------
   watch(
     theme_color,
     () => {
@@ -82,7 +94,7 @@
     </template>
     <!--插槽: 底栏-->
     <template v-slot:foot>
-      <div>动态底栏</div>
+      <div class="demo-footer">{{ _bug_msg }}</div>
     </template>
     <!--插槽: 主区域-->
     <RouterView
@@ -92,3 +104,12 @@
       @toggle:theme_color="ToggleThemeColorMode" />
   </TiMainFrame>
 </template>
+
+<style scoped lang="scss">
+  @use '@site0/tijs/scss' as *;
+  .demo-footer {
+    @include font-fixed;
+    font-size: 10px;
+    padding:0 .8em;
+  }
+</style>
