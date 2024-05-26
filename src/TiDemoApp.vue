@@ -94,7 +94,7 @@
     </template>
     <!--插槽: 底栏-->
     <template v-slot:foot>
-      <div class="demo-footer">{{ _bug_msg }}</div>
+      <div class="demo-footer">{{ _bug_msg || '-- 总线无消息 --' }}</div>
     </template>
     <!--插槽: 主区域-->
     <RouterView
