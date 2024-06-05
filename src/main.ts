@@ -5,6 +5,7 @@ import {
   LogLevel,
   MessageMap,
   TiComSet,
+  TiDict,
   addLogger,
   installTiCoreI18n,
   setDefaultLogLevel,
@@ -58,7 +59,7 @@ installTiCoreI18n(lang, true);
 //   }
 // })
 function makeDictQuery(path: string) {
-  return async (hint: string, signal?: AbortSignal) =>
+  return async (_dict: TiDict, hint: string, signal?: AbortSignal) =>
     new Promise<any[]>((resolve, reject) => {
       let url = `https://t.site0.xyz/a/lookup/${path}&hint=${encodeURIComponent(
         hint
