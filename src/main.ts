@@ -29,6 +29,7 @@ setDefaultLogLevel(LogLevel.WARN);
 addLogger('ti', LogLevel.WARN);
 addLogger('Ti', LogLevel.WARN);
 addLogger('TiTable.resizing', LogLevel.WARN);
+addLogger('TiTable', LogLevel.DEBUG);
 tidyLogger();
 //
 // 准备自定义控件
