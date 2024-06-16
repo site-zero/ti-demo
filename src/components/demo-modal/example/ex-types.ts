@@ -32,7 +32,7 @@ export function genDialogItems(
     genSnippet('left-top', 'info'),
     genSnippet('top', 'success'),
     genSnippet('right-top', 'warn'),
-    genSnippet('left', 'error'),
+    genSnippet('left', 'danger'),
     genSnippet('center'),
     genSnippet('right'),
     genSnippet('bottom-left'),
