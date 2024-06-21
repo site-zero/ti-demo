@@ -119,7 +119,7 @@
       @include font-fixed;
       font-size: 9px;
       padding: 0 0.2em;
-      color: var(--ti-color-disable);
+      color: var(--ti-color-track);
     }
   }
 
