@@ -12,7 +12,7 @@
     "chance": "^1.1.11",
     "json5": "^2.2.3",
     "lodash": "^4.17.21",
-    "vue": "^3.4.27",
+    "vue": "^3.4.30",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
