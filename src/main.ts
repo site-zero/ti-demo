@@ -26,7 +26,7 @@ let cn = zh_cn as MessageMap;
 let en = en_us as MessageMap;
 
 setDefaultLogLevel(LogLevel.WARN);
-addLogger('ti', LogLevel.WARN);
+addLogger('ti', LogLevel.DEBUG);
 addLogger('Ti', LogLevel.WARN);
 addLogger('TiTable.resizing', LogLevel.WARN);
 addLogger('TiTable', LogLevel.DEBUG);
