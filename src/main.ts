@@ -28,6 +28,7 @@ let en = en_us as MessageMap;
 setDefaultLogLevel(LogLevel.WARN);
 addLogger('ti', LogLevel.WARN);
 addLogger('Ti', LogLevel.WARN);
+//addLogger('ti.use-app-model-binding', LogLevel.DEBUG);
 //addLogger('TiTable', LogLevel.DEBUG);
 tidyLogger();
 //
