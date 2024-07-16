@@ -96,7 +96,7 @@
         <div v-for="it in grp.items" :class="it.className" class="nav-item">
           <RouterLink :to="it.href">
             <TiIcon class="s24" :value="it.icon || 'fas-question'" />
-            <span>{{ I18n.text(it.text) }}</span>
+            <span>{{ I18n.text(it.text ?? it.name) }}</span>
           </RouterLink>
         </div>
       </section>
@@ -180,7 +180,6 @@
         }
       }
 
-      
       &.is-scaffold > a {
         color: var(--ti-color-track);
         > * {
