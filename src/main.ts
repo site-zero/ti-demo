@@ -102,6 +102,41 @@ function createDemoDict(name: string, path: string) {
 //
 createDemoDict('hello', '/test?min=4&max=10&len=100');
 createDemoDict('hello100', '/test?min=90&max=100&len=100');
+Dicts.getOrCreate(
+  Dicts.makeDictOptions({
+    data: [
+      { value: 'AUD', text: 'Australian Dollar' },
+      { value: 'CNY', text: 'Chinese Yuan' },
+      { value: 'EUR', text: 'Euro' },
+      { value: 'GBP', text: 'British Pound' },
+      { value: 'HKD', text: 'Hong Kong Dollar' },
+      { value: 'JPY', text: 'Japanese Yen' },
+      { value: 'USD', text: 'US Dollar' },
+    ],
+  }),
+  'Currencies'
+);
+Dicts.getOrCreate(
+  Dicts.makeDictOptions({
+    data: [
+      { value: 'G', text: 'GRAM' },
+      { value: 'HG', text: 'HECTOGRAM' },
+      { value: 'KG', text: 'KILOGRAM' },
+      { value: 'T', text: 'TONNE' },
+    ],
+  }),
+  'WeightUnits'
+);
+Dicts.getOrCreate(
+  Dicts.makeDictOptions({
+    data: [
+      { value: 'CC', text: 'CM3', tip: 'CUBIC CENTIMETRE' },
+      { value: 'C8', text: 'DM3', tip: 'CUBIC DECIMETRE' },
+      { value: 'CU', text: 'M3', tip: 'CUBIC METRE' },
+    ],
+  }),
+  'VolumeUnits'
+);
 
 //
 // 准备路由
