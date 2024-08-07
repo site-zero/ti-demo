@@ -158,7 +158,7 @@
           text-overflow: ellipsis;
         }
         &:hover {
-          background-color: var(--ti-color-hightlight);
+          background-color: var(--ti-color-highlight);
           text-decoration: none;
           span {
             text-decoration: underline;

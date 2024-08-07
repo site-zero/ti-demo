@@ -62,9 +62,9 @@ installTiCoreI18n(lang, true);
 function makeDictQuery(path: string) {
   return async (_dict: TiDict, hint: string, signal?: AbortSignal) =>
     new Promise<any[]>((resolve, reject) => {
-      let url = `https://t.site0.xyz/a/lookup/${path}&hint=${encodeURIComponent(
-        hint
-      )}`;
+      let host = 'https://t.site0.xyz';
+      host = 'http://localhost:8080';
+      let url = `${host}/a/lookup/${path}&hint=${encodeURIComponent(hint)}`;
       fetch(url, {
         signal,
       })
@@ -100,8 +100,8 @@ function createDemoDict(name: string, path: string) {
 //
 // 准备字典
 //
-createDemoDict('hello', '/test?min=4&max=10&len=100');
-createDemoDict('hello100', '/test?min=90&max=100&len=100');
+createDemoDict('hello', '/test?limit=10');
+createDemoDict('hello100', '/test?limit=100');
 Dicts.getOrCreate(
   Dicts.makeDictOptions({
     data: [
