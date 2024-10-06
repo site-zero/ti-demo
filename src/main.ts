@@ -6,6 +6,7 @@ import {
   MessageMap,
   TiComSet,
   TiDict,
+  TiIconInfo,
   addLogger,
   installTiCoreI18n,
   setDefaultLogLevel,
@@ -169,5 +170,5 @@ let router = createRouter({
 let app = createApp(TiDemoApp);
 //app.config.devtools = true;
 app.use(router);
-
+app.component('TiIcon', TiIconInfo.com);
 app.mount('#app');
