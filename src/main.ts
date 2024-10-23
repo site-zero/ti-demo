@@ -13,7 +13,6 @@ import {
   tiPutComponents,
   tidyLogger,
 } from '@site0/tijs';
-import '@site0/tijs/style.scss';
 import { createApp } from 'vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
 import TiDemoApp from './TiDemoApp.vue';
