@@ -76,7 +76,7 @@
 </template>
 
 <style scoped lang="scss">
-  @use '@site0/tijs/scss' as *;
+  @use '@site0/tijs/sass/_all.scss' as *;
 
   .page-detail {
     @include flex-align-v-nowrap;

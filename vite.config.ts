@@ -6,8 +6,14 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      'vue': 'vue/dist/vue.esm-bundler.js',
-      '@ti-sass': '@site0/tijs/sass',
+      vue: 'vue/dist/vue.esm-bundler.js',
+    },
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler', // or "modern"
+      },
     },
   },
   optimizeDeps: {

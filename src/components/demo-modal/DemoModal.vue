@@ -48,7 +48,7 @@
   </div>
 </template>
 <style scoped lang="scss">
-  @use '@site0/tijs/scss' as *;
+  @use '@site0/tijs/sass/_all.scss' as *;
 
   .demo-modal {
     padding: SZ(10);
