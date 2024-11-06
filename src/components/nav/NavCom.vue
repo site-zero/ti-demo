@@ -75,7 +75,7 @@
         items: _.sortBy(items, 'name'),
       });
     });
-    return groups;
+    return groups.reverse();
   });
 
   // function OnClickItem(it: NavItem) {
