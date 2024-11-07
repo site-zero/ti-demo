@@ -30,8 +30,8 @@
     items: NavItem[];
   };
 
-  let allComs = tiFindComponents();
   const _com_count = ref(0);
+  let allComs = _.cloneDeep(tiFindComponents());
 
   const NavItemGroups = computed(() => {
     // 准备归纳
