@@ -17,6 +17,7 @@ import { createApp } from 'vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
 import TiDemoApp from './TiDemoApp.vue';
 import { DemoModalInfo } from './components/demo-modal/demo-modal-index';
+import { DemoTipsInfo } from './components/demo-tips/demo-tips-index';
 import PageDetail from './components/detail/PageDetail.vue';
 import NavCom from './components/nav/NavCom.vue';
 import en_us from './i18n/en-us.json';
@@ -36,6 +37,7 @@ tidyLogger();
 //
 const demos = {
   DemoModal: DemoModalInfo,
+  DemoTips: DemoTipsInfo,
 } as TiComSet;
 tiPutComponents(demos);
 
