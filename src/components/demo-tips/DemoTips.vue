@@ -30,7 +30,6 @@
     content:
       'Customizing TiTextSnippet in Vue 3 with Vite using JSX brings new flexibility.',
     dockMode: 'V-top',
-    width: '120px',
     type: 'number',
   });
   _tips?.addTip({
@@ -38,7 +37,6 @@
     content:
       'Customizing TiTextSnippet in Vue 3 with Vite using JSX brings new flexibility.',
     dockMode: 'V-bottom',
-    width: '120px',
     type: 'text',
   });
 </script>
