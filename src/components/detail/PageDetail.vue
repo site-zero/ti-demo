@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import { TiIcon, TiPlayground, tiCheckComponent } from '@site0/tijs';
-  import _ from 'lodash';
+  import { TiIcon, tiCheckComponent } from '@site0/tijs';
   import { computed } from 'vue';
+  import Playground from '../playground/Playground.vue';
 
   const emit = defineEmits(['toggle:theme_color']);
   /*-------------------------------------------------------
@@ -68,10 +68,7 @@
         </li>
       </ul>
     </blockquote>
-    <TiPlayground
-      :comType="comType"
-      :example="example"
-      :exampleAsRouterLink="true" />
+    <Playground :comType="comType" :example="example" />
   </div>
 </template>
 

@@ -1,15 +1,8 @@
 <script setup lang="ts">
-  import {
-    CssUtils,
-    I18n,
-    TiComInfo,
-    TiComRace,
-    TiIcon,
-    Vars,
-    tiFindComponents,
-  } from '@site0/tijs';
+  import { CssUtils, I18n, TiIcon } from '@site0/tijs';
   import _ from 'lodash';
-  import { computed, ref } from 'vue';
+  import { ref } from 'vue';
+  import { buildNavItemGroups, NavItem, NavItemGroup } from './build-nav-items';
 
   type NavProps = {
     current?: string;
@@ -17,66 +10,16 @@
 
   const props = defineProps<NavProps>();
 
-  interface NavItem extends TiComInfo {
-    icon: string;
-    className?: Vars;
-    current?: boolean;
-    href: string;
-  }
-
-  type NavItemGroup = {
-    race: TiComRace;
-    text: string;
-    items: NavItem[];
-  };
-
   const _com_count = ref(0);
-  let allComs = _.cloneDeep(tiFindComponents());
+  const _com_grops = ref<NavItemGroup[]>(buildNavItemGroups(_com_count));
 
-  const NavItemGroups = computed(() => {
-    // 准备归纳
-    let itemMap = {} as {
-      [k: string]: NavItem[];
-    };
-
-    // 归纳
-    _com_count.value = 0;
-    for (let comInfo of allComs) {
-      if (comInfo.asInner) {
-        continue;
-      }
-      _com_count.value += 1;
-      let current = comInfo.name == props.current;
-      let it: NavItem = {
-        ...comInfo,
-        current,
-        className: CssUtils.mergeClassName(
-          {
-            'is-current': current,
-          },
-          _.map(comInfo.tags, (tag) => `is-${tag}`)
-        ),
-        href: `/${comInfo.name}`,
-      };
-      let items = itemMap[it.race];
-      if (!items) {
-        items = [];
-        itemMap[it.race] = items;
-      }
-      items.push(it);
+  function getItemClass(it: NavItem) {
+    let re = CssUtils.mergeClassName(_.map(it.tags, (tag) => `is-${tag}`));
+    if (it.name == props.current) {
+      re['is-current'] = true;
     }
-
-    // 输出列表
-    let groups: NavItemGroup[] = [];
-    _.forEach(itemMap, (items, race) => {
-      groups.push({
-        race: race as TiComRace,
-        text: race,
-        items: _.sortBy(items, 'name'),
-      });
-    });
-    return groups.reverse();
-  });
+    return re;
+  }
 
   // function OnClickItem(it: NavItem) {
   //   if (it.current) {
@@ -88,12 +31,12 @@
 
 <template>
   <nav>
-    <template v-for="grp in NavItemGroups">
+    <template v-for="grp in _com_grops">
       <h3>
         {{ grp.text }} <em> x {{ grp.items.length }}</em>
       </h3>
       <section>
-        <div v-for="it in grp.items" :class="it.className" class="nav-item">
+        <div v-for="it in grp.items" :class="getItemClass(it)" class="nav-item">
           <RouterLink :to="it.href">
             <TiIcon class="s24" :value="it.icon || 'fas-question'" />
             <span>{{ I18n.text(it.text ?? it.name) }}</span>
