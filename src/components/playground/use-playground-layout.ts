@@ -18,10 +18,13 @@ export function usePlaygroundLayout(api: PlaygroundFeature): LayoutGridProps {
     },
     blocks: [
       {
-        name: 'tabs',
-        grid: {
-          gridColumn: '1/span 2',
+        type: 'grid',
+        grid: { gridColumn: '1/span 2' },
+        layout: {
+          gridTemplateColumns: '1fr auto auto',
+          gridTemplateRows: '1fr',
         },
+        blocks: [{ name: 'tabs' }, { name: 'modes' }, { name: 'bgs' }],
       },
       {
         name: 'live',
@@ -32,7 +35,8 @@ export function usePlaygroundLayout(api: PlaygroundFeature): LayoutGridProps {
         //   justifyContent: 'center',
         //   height: '100%',
         // },
-        mainStyle: api.getComLiveStyle(),
+        bodyStyle: api.getBlockBodyStyle(),
+        mainStyle: api.getBlockMainStyle(),
         bar: {
           mode: 'column',
           position: 'next',

@@ -1,14 +1,20 @@
-import { CssUtils, I18n, StrOptionItem, tiCheckComponent } from '@site0/tijs';
+import { I18n, StrOptionItem, tiCheckComponent } from '@site0/tijs';
 import _ from 'lodash';
+import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { PlaygroundProps } from './playground-types';
 
 export type PlaygroundFeature = ReturnType<typeof usePlayground>;
+export type PlaygroundLayoutMode = 'LR' | 'TB' | 'FU';
+export type PlaygroundLiveBg = 'transparent' | 'filled';
 
 export function usePlayground(props: PlaygroundProps) {
   const comInfo = tiCheckComponent(props.comType);
   const exampleName = props.example || comInfo.defaultProps || 'simple';
   const router = useRouter();
+
+  const _view_mode = ref<PlaygroundLayoutMode>('LR');
+  const _live_bg = ref<PlaygroundLiveBg>('filled');
 
   function getExampleOptions() {
     let re = [] as StrOptionItem[];
@@ -32,49 +38,67 @@ export function usePlayground(props: PlaygroundProps) {
     return _.cloneDeep(ex.comConf);
   }
 
-  function getComLiveStyle() {
-    if (!_.isEmpty(comInfo.liveStyle)) {
-      return CssUtils.toStyle(comInfo.liveStyle);
-    }
+  function getBlockBodyStyle() {
     // 采用默认样式
     return {
       INPUT: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '100%',
       },
-      EDIT: {
-        width: '100%',
-        height: '100%',
-      },
-      SHELF: {
-        width: '100%',
-        height: '100%',
-      },
+      EDIT: {},
+      SHELF: {},
       ACTION: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '100%',
       },
       TILE: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '100%',
       },
       PLAY: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '100%',
       },
-      VIEW: {
-        width: '100%',
-        height: '100%',
-      },
+      VIEW: {},
     }[comInfo.race];
+  }
+
+  function getBlockMainStyle() {
+    let re = {
+      INPUT: {
+        display: 'flex',
+        maxWidth: '500px',
+        margin: 'auto',
+        paddingBottom: '20%',
+        postion: 'static',
+        inset: 'unset',
+        height: 'unset',
+        width: 'unset',
+      },
+      EDIT: {},
+      SHELF: {},
+      ACTION: {},
+      TILE: {
+        display: 'flex',
+        maxWidth: '500px',
+        margin: 'auto',
+        paddingBottom: '20%',
+        postion: 'static',
+        inset: 'unset',
+        height: 'unset',
+        width: 'unset',
+      },
+      PLAY: {},
+      VIEW: {},
+    }[comInfo.race];
+
+    _.assign(re, comInfo.liveStyle);
+
+    return re;
   }
 
   function selectExample(exName: string) {
@@ -88,7 +112,10 @@ export function usePlayground(props: PlaygroundProps) {
     exampleName,
     getExampleOptions,
     getExampleProps,
-    getComLiveStyle,
-    selectExample
+    getBlockBodyStyle,
+    getBlockMainStyle,
+    selectExample,
+    BGMode: computed(() => _live_bg.value),
+    ViewMode: computed(() => _view_mode.value),
   };
 }
