@@ -5,7 +5,7 @@
     DateTime,
     Dom,
     Num,
-    TIPSET_API,
+    TI_TIPS_API,
     TiMainFrame,
     TiStore,
     createAppBus,
@@ -20,7 +20,7 @@
   let $app_el = Dom.find('#app');
   if ($app_el) {
     let tips = _app_tips.createAppTipSet($app_el);
-    provide(TIPSET_API, tips);
+    provide(TI_TIPS_API, tips);
   }
 
   //-------------------------------------------------------

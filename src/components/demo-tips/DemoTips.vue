@@ -1,8 +1,8 @@
 <script setup lang="ts">
-  import { TIPSET_API } from '@site0/tijs';
+  import { TI_TIPS_API } from '@site0/tijs';
   import { inject, onMounted, onUnmounted, useTemplateRef } from 'vue';
 
-  const _app_tips = inject(TIPSET_API);
+  const _app_tips = inject(TI_TIPS_API);
   const $main = useTemplateRef('main');
   const _tips = _app_tips?.createComTips({
     getScope: () => $main.value,
