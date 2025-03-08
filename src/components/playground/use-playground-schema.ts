@@ -5,7 +5,7 @@ import { PlaygroundFeature } from './use-playground';
 export function usePlaygroundSchema(
   props: PlaygroundProps,
   api: PlaygroundFeature
-) {
+): LayoutSchema {
   const config = api.getExampleProps();
   const exOptions = api.getExampleOptions();
   return {
@@ -26,7 +26,7 @@ export function usePlaygroundSchema(
     modes: {
       comType: 'TiSwitcher',
       comConf: {
-        value: api.ViewMode.value,
+        value: api.LayoutMode.value,
         style: { padding: '.4em' },
         defaultItemType: 'success',
         itemGap: 't',
@@ -39,14 +39,21 @@ export function usePlaygroundSchema(
       } as SwitcherProps,
       events: {
         change: ({ data }) => {
-          console.log('menu change', data);
+          console.log('layout change', data)
+          if (data == 'LR') {
+            api.setLayoutMode('LR');
+          } else if (data == 'TB') {
+            api.setLayoutMode('TB');
+          } else {
+            api.setLayoutMode('FU');
+          }
         },
       },
     },
     bgs: {
       comType: 'TiSwitcher',
       comConf: {
-        value: api.BGMode.value,
+        value: api.BackgroundMode.value,
         style: { padding: '.4em' },
         defaultItemType: 'number',
         itemGap: 't',
@@ -58,21 +65,33 @@ export function usePlaygroundSchema(
       } as SwitcherProps,
       events: {
         change: ({ data }) => {
-          console.log('menu change', data);
+          console.log('bg change', data);
+          if ('filled' == data) {
+            api.setBackground('filled');
+          } else {
+            api.setBackground('transparent');
+          }
         },
       },
     },
     live: {
       comType: props.comType,
       comConf: config,
+      events: api.getLiveEventHandlers(),
     },
     conf: {
       comType: 'TiCodeEditor',
       comConf: {
         className: 'fit-parent',
         value: config,
-        type: 'json',
+        type: 'json5',
       } as CodeEditorProps,
+      events: {
+        change: ({ data }) => {
+          console.log('conf change', data);
+          api.onComConfChange(data);
+        }
+      }
     },
   } as LayoutSchema;
 }
