@@ -1,16 +1,34 @@
-import { DeltaUpdateMode, EmitAdaptor, EmitAdaptorPayload, I18n, StrOptionItem, TiAppBus, tiCheckComponent, TiComExampleModelTarget, Tmpl, Util, Vars } from '@site0/tijs';
+import {
+  DeltaUpdateMode,
+  EmitAdaptor,
+  EmitAdaptorPayload,
+  I18n,
+  StrOptionItem,
+  TiAppBus,
+  tiCheckComponent,
+  TiComExampleModelTarget,
+  Tmpl,
+  Util,
+  Vars,
+} from '@site0/tijs';
 import JSON5 from 'json5';
 import _ from 'lodash';
 import { computed, ref, Ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { PlaygroundBackground, PlaygroundLayoutMode, PlaygroundProps } from './playground-types';
+import {
+  PlaygroundBackground,
+  PlaygroundLayoutMode,
+  PlaygroundProps,
+} from './playground-types';
 
 export type PlaygroundFeature = ReturnType<typeof usePlayground>;
 
-export function usePlayground(props: PlaygroundProps,
+export function usePlayground(
+  props: PlaygroundProps,
   _bus: TiAppBus,
   _layout_mode: Ref<PlaygroundLayoutMode>,
-  _background: Ref<PlaygroundBackground>) {
+  _background: Ref<PlaygroundBackground>
+) {
   const comInfo = tiCheckComponent(props.comType);
   const exampleName = props.example || comInfo.defaultProps || 'simple';
   const router = useRouter();
@@ -18,21 +36,21 @@ export function usePlayground(props: PlaygroundProps,
   const _cus_config_txt = ref<string>();
 
   function onComConfChange(input: string) {
-    console.log('onComConfigChange', typeof input, input);
+    //console.log('onComConfigChange', typeof input, input);
     try {
       let config = JSON5.parse(input);
       _cus_config_txt.value = input;
       _cus_config_var.value = config;
     } catch (err) {
-      console.info('parse error', err);
+      //console.info('parse error', err);
     }
   }
 
   function __handle_sub_event(event: EmitAdaptorPayload) {
-    let { eventName, data: payload } = event
-    console.log('__handle_sub_event', eventName, payload);
+    let { eventName, data: payload } = event;
+    //console.log('__handle_sub_event', eventName, payload);
     _bus.emit(eventName, payload);
-    let comConf = getExampleProps();
+    //let comConf = getExampleProps();
 
     // 处理属性更新
     let model = comInfo.exampleModel;
@@ -86,7 +104,7 @@ export function usePlayground(props: PlaygroundProps,
 
   function getLiveEventHandlers() {
     let re = {} as Record<string, EmitAdaptor>;
-    let models = comInfo.exampleModel ?? { 'change': 'value' };
+    let models = comInfo.exampleModel ?? { change: 'value' };
     for (let eventName of _.keys(models)) {
       re[eventName] = __handle_sub_event;
     }
@@ -113,7 +131,7 @@ export function usePlayground(props: PlaygroundProps,
     // 采用默认
     let ex = _.find(comInfo.exampleProps, (ex) => ex.name === exampleName);
     if (!ex) {
-      return {}
+      return {};
     }
     if (_.isFunction(ex.comConf)) {
       return _.cloneDeep(ex.comConf());

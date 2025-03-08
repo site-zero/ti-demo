@@ -88,7 +88,7 @@ export function usePlaygroundSchema(
       } as CodeEditorProps,
       events: {
         change: ({ data }) => {
-          console.log('conf change', data);
+          // console.log('conf change', data);
           api.onComConfChange(data);
         }
       }

@@ -7,11 +7,12 @@ const LAYOUTS: Record<PlaygroundLayoutMode, (api: PlaygroundFeature) => LayoutGr
   // 左右布局
   //-------------------------------------
   LR: (api) => ({
-    className: 'fit-parent',
+    className: 'fit-parent as-card with-shadown r-s',
     keepSizes: 'local: Demo-Playground-Layout-Sizes-LR',
     gridStyle: {
       backgroundColor: 'var(--ti-color-border-thin)',
-      gap: '2px',
+      padding: 'var(--ti-gap-m)',
+      gap: 'var(--ti-gap-m)',
     },
     itemStyle: {
       backgroundColor: 'var(--ti-color-card)',
@@ -61,11 +62,12 @@ const LAYOUTS: Record<PlaygroundLayoutMode, (api: PlaygroundFeature) => LayoutGr
   // 上下布局
   //-------------------------------------
   TB: (api) => ({
-    className: 'fit-parent',
+    className: 'fit-parent as-card with-shadown r-s',
     keepSizes: 'local: Demo-Playground-Layout-Sizes-TB',
     gridStyle: {
       backgroundColor: 'var(--ti-color-border-thin)',
-      gap: '2px',
+      padding: 'var(--ti-gap-m)',
+      gap: 'var(--ti-gap-m)',
     },
     itemStyle: {
       backgroundColor: 'var(--ti-color-card)',
@@ -114,11 +116,12 @@ const LAYOUTS: Record<PlaygroundLayoutMode, (api: PlaygroundFeature) => LayoutGr
   // 全屏模式
   //-------------------------------------
   FU: (api) => ({
-    className: 'fit-parent',
+    className: 'fit-parent as-card with-shadown r-s',
     keepSizes: 'local: Demo-Playground-Layout-Sizes-FU',
     gridStyle: {
       backgroundColor: 'var(--ti-color-border-thin)',
-      gap: '2px',
+      padding: 'var(--ti-gap-m)',
+      gap: 'var(--ti-gap-m)',
     },
     itemStyle: {
       backgroundColor: 'var(--ti-color-card)',
