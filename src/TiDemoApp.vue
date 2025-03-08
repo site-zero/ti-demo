@@ -6,14 +6,15 @@
     Dom,
     Num,
     TI_TIPS_API,
-    TiMainFrame,
+    TiLayoutGrid,
     TiStore,
     createAppBus,
     useTipManager,
     watchAppResize,
   } from '@site0/tijs';
   import JSON5 from 'json5';
-  import { onMounted, onUnmounted, provide, ref, watch } from 'vue';
+  import { computed, onMounted, onUnmounted, provide, ref, watch } from 'vue';
+  import { useDemoAppLayout } from './components/demo-app-layout';
   //-------------------------------------------------------
   // 准备提示信息
   const _app_tips = useTipManager();
@@ -22,7 +23,11 @@
     let tips = _app_tips.createAppTipSet($app_el);
     provide(TI_TIPS_API, tips);
   }
-
+  //--------------------------------------------------
+  //
+  // GUI Setup
+  //
+  const GUILayout = computed(() => useDemoAppLayout());
   //-------------------------------------------------------
   //
   //               全局消息总线
@@ -97,35 +102,59 @@
 </script>
 
 <template>
-  <TiMainFrame
-    mode="Z"
+  <TiLayoutGrid
+    v-bind="GUILayout"
     :keep-frame="{ keepAt: 'Ti-Demo-MainFrame', keepMode: 'local' }">
-    <!--插槽: 顶栏-->
-    <template v-slot:sky>
-      <h1 class="demo-sky">Ti Demo App</h1>
+    <template v-slot:default="block">
+      <!--插槽: 顶栏-->
+      <h1 v-if="'sky' == block.item.name" class="demo-sky">Ti Demo App</h1>
+      <!--插槽: 侧边栏-->
+      <RouterView
+        v-else-if="'chute' == block.item.name"
+        class="demo-chute"
+        name="chute" />
+      <!--插槽: 底栏-->
+      <div v-else-if="'foot' == block.item.name" class="demo-footer">
+        <div>{{ _bug_msg || '-- 总线无消息 --' }}</div>
+      </div>
+      <!--插槽: 主区域-->
+      <RouterView
+        v-else-if="'arena' == block.item.name"
+        class="demo-arena"
+        name="arena"
+        :theme_color="theme_color"
+        @toggle:theme_color="ToggleThemeColorMode" />
     </template>
-    <!--插槽: 侧边栏-->
-    <template v-slot:chute>
-      <RouterView class="chute" name="chute" />
-    </template>
-    <!--插槽: 底栏-->
-    <template v-slot:foot>
-      <div class="demo-footer">{{ _bug_msg || '-- 总线无消息 --' }}</div>
-    </template>
-    <!--插槽: 主区域-->
-    <RouterView
-      class="arena"
-      name="arena"
-      :theme_color="theme_color"
-      @toggle:theme_color="ToggleThemeColorMode" />
-  </TiMainFrame>
+  </TiLayoutGrid>
 </template>
 
 <style scoped lang="scss">
   @use '@site0/tijs/sass/_all.scss' as *;
+
+  .demo-sky {
+    @include flex-align-nowrap;
+    padding: 0 0.65em;
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  nav.demo-chute {
+    position: absolute;
+    inset: 0;
+    overflow: auto;
+  }
   .demo-footer {
+    @include flex-align-nowrap;
     @include font-fixed;
-    font-size: 10px;
-    padding: 0 0.8em;
+    position: absolute;
+    inset: 0;
+    font-size: 11px;
+    > div {
+      padding: 0 0.8em;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 </style>

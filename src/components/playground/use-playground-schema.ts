@@ -6,7 +6,8 @@ export function usePlaygroundSchema(
   props: PlaygroundProps,
   api: PlaygroundFeature
 ): LayoutSchema {
-  const config = api.getExampleProps();
+  const configText = api._cus_config_txt.value;
+  const configVars = api._cus_config_var.value;
   const exOptions = api.getExampleOptions();
   return {
     tabs: {
@@ -39,7 +40,7 @@ export function usePlaygroundSchema(
       } as SwitcherProps,
       events: {
         change: ({ data }) => {
-          console.log('layout change', data)
+          console.log('layout change', data);
           if (data == 'LR') {
             api.setLayoutMode('LR');
           } else if (data == 'TB') {
@@ -76,22 +77,22 @@ export function usePlaygroundSchema(
     },
     live: {
       comType: props.comType,
-      comConf: config,
+      comConf: configVars,
       events: api.getLiveEventHandlers(),
     },
     conf: {
       comType: 'TiCodeEditor',
       comConf: {
         className: 'fit-parent',
-        value: config,
+        value: configText,
         type: 'json5',
       } as CodeEditorProps,
       events: {
         change: ({ data }) => {
           // console.log('conf change', data);
           api.onComConfChange(data);
-        }
-      }
+        },
+      },
     },
   } as LayoutSchema;
 }

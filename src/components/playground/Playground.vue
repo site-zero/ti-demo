@@ -1,6 +1,7 @@
 <script lang="ts" setup>
   import { BUS_KEY, TiLayoutGrid, useKeep, Vars } from '@site0/tijs';
   import { computed, inject, ref, watch } from 'vue';
+  import { useRouter } from 'vue-router';
   import {
     PlaygroundBackground,
     PlaygroundLayoutMode,
@@ -12,12 +13,13 @@
   //--------------------------------------------------
   const props = defineProps<PlaygroundProps>();
   //--------------------------------------------------
+  const router = useRouter();
   const _bus = inject(BUS_KEY);
   const _shown = ref<Vars>({});
   const _layout_mode = ref<PlaygroundLayoutMode>('LR');
   const _background = ref<PlaygroundBackground>('filled');
   const api = computed(() =>
-    usePlayground(props, _bus!, _layout_mode, _background)
+    usePlayground(props, _bus!, router, _layout_mode, _background)
   );
   //--------------------------------------------------
   const GUILayout = computed(() => usePlaygroundLayout(api.value));
@@ -32,6 +34,7 @@
     _layout_mode.value = state_loal.layout_mode || 'LR';
     _background.value = state_loal.background || 'filled';
   }
+  //--------------------------------------------------
   watch(
     () => [_layout_mode.value, _background.value],
     () => {
@@ -41,6 +44,14 @@
       };
       keep.save(data);
     }
+  );
+  //--------------------------------------------------
+  watch(
+    () => [props.comType, props.example],
+    () => {
+      api.value.loadExampleProps();
+    },
+    { immediate: true }
   );
   //--------------------------------------------------
 </script>

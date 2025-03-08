@@ -14,24 +14,24 @@ import {
 import JSON5 from 'json5';
 import _ from 'lodash';
 import { computed, ref, Ref } from 'vue';
-import { useRouter } from 'vue-router';
 import {
   PlaygroundBackground,
   PlaygroundLayoutMode,
   PlaygroundProps,
 } from './playground-types';
+import { Router } from 'vue-router';
 
 export type PlaygroundFeature = ReturnType<typeof usePlayground>;
 
 export function usePlayground(
   props: PlaygroundProps,
   _bus: TiAppBus,
+  router: Router,
   _layout_mode: Ref<PlaygroundLayoutMode>,
   _background: Ref<PlaygroundBackground>
 ) {
   const comInfo = tiCheckComponent(props.comType);
   const exampleName = props.example || comInfo.defaultProps || 'simple';
-  const router = useRouter();
   const _cus_config_var = ref<Vars>();
   const _cus_config_txt = ref<string>();
 
@@ -86,7 +86,7 @@ export function usePlayground(
           if (val && val instanceof Map) {
             val = Util.mapToObj(val);
           }
-          _.merge(delta, val);
+          _.set(delta, key, val);
         }
 
         // 更新配置信息
@@ -122,21 +122,26 @@ export function usePlayground(
     return re;
   }
 
-  function getExampleProps(): Vars {
-    // 采用自定义
-    if (!_.isEmpty(_cus_config_var.value)) {
-      return _.assign({}, _cus_config_var.value);
+  function loadExampleProps() {
+    let ex = _.find(comInfo.exampleProps, (ex) => ex.name === exampleName);
+    let config: Vars;
+
+    // 未找到设置
+    if (!ex) {
+      config = {};
+    }
+    // 动态设置
+    else if (_.isFunction(ex.comConf)) {
+      config = ex.comConf();
+    }
+    // 直接复制
+    else {
+      config = _.cloneDeep(ex.comConf);
     }
 
-    // 采用默认
-    let ex = _.find(comInfo.exampleProps, (ex) => ex.name === exampleName);
-    if (!ex) {
-      return {};
-    }
-    if (_.isFunction(ex.comConf)) {
-      return _.cloneDeep(ex.comConf());
-    }
-    return _.cloneDeep(ex.comConf);
+    // 设置内容
+    _cus_config_txt.value = JSON5.stringify(config, null, 2);
+    _cus_config_var.value = config;
   }
 
   function getBlockBodyStyle() {
@@ -207,14 +212,16 @@ export function usePlayground(
 
   // 输出特性
   return {
+    _cus_config_txt,
+    _cus_config_var,
     comInfo,
     exampleName,
     onComConfChange,
     getLiveEventHandlers,
     getExampleOptions,
-    getExampleProps,
     getBlockBodyStyle,
     getBlockMainStyle,
+    loadExampleProps,
     selectExample,
     setBackground: (bg: PlaygroundBackground) => {
       _background.value = bg;
