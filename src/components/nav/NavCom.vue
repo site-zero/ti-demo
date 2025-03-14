@@ -1,18 +1,17 @@
 <script setup lang="ts">
-  import { CssUtils, I18n, TiIcon } from '@site0/tijs';
+  import { CssUtils, Dom, I18n, TiIcon } from '@site0/tijs';
   import _ from 'lodash';
-  import { ref } from 'vue';
+  import { onMounted, ref, useTemplateRef, watch } from 'vue';
   import { buildNavItemGroups, NavItem, NavItemGroup } from './build-nav-items';
-
-  type NavProps = {
+  //-----------------------------------------------------
+  const props = defineProps<{
     current?: string;
-  };
-
-  const props = defineProps<NavProps>();
-
+  }>();
+  //-----------------------------------------------------
+  const $el = useTemplateRef<HTMLElement>('el');
   const _com_count = ref(0);
   const _com_grops = ref<NavItemGroup[]>(buildNavItemGroups(_com_count));
-
+  //-----------------------------------------------------
   function getItemClass(it: NavItem) {
     let re = CssUtils.mergeClassName(_.map(it.tags, (tag) => `is-${tag}`));
     if (it.name == props.current) {
@@ -20,17 +19,37 @@
     }
     return re;
   }
-
-  // function OnClickItem(it: NavItem) {
-  //   if (it.current) {
-  //     return;
-  //   }
-  //   emit("select", it.name);
-  // }
+  //-----------------------------------------------------
+  type ScrollBlock = 'start' | 'center' | 'end' | 'nearest';
+  function autoScrollCurrentIntoView(
+    block: ScrollBlock = 'nearest',
+    inline: ScrollBlock = 'nearest'
+  ) {
+    let el = Dom.find('.is-current', $el.value!);
+    if (el) {
+      el.scrollIntoView({
+        behavior: 'smooth', // 启用平滑滚动
+        block,
+        inline,
+      });
+    }
+  }
+  //-----------------------------------------------------
+  watch(
+    () => props.current,
+    () => {
+      _.delay(() => autoScrollCurrentIntoView(), 100);
+    }
+  );
+  //-----------------------------------------------------
+  onMounted(() => {
+    _.delay(() => autoScrollCurrentIntoView('center'), 10);
+  });
+  //-----------------------------------------------------
 </script>
 
 <template>
-  <nav>
+  <nav ref="el">
     <template v-for="grp in _com_grops">
       <h3>
         {{ grp.text }} <em> x {{ grp.items.length }}</em>

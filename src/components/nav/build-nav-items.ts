@@ -1,18 +1,18 @@
 import { TiComInfo, TiComRace, tiFindComponents } from '@site0/tijs';
-import { Ref } from 'vue';
 import _ from 'lodash';
-
+import { Ref } from 'vue';
+//-----------------------------------------------------
 export interface NavItem extends TiComInfo {
   icon: string;
   href: string;
 }
-
+//-----------------------------------------------------
 export type NavItemGroup = {
   race: TiComRace;
   text: string;
   items: NavItem[];
 };
-
+//-----------------------------------------------------
 export function buildNavItemGroups(_com_count: Ref<number>) {
   const allComs = _.cloneDeep(tiFindComponents());
   // 准备归纳

@@ -4,10 +4,10 @@ export function useDemoAppLayout(): LayoutGridProps {
   return {
     className: 'fit-parent as-card',
     blockOverflowMode: 'cover',
-    // keepSizes: {
-    //   keepMode: 'local',
-    //   keepAt: 'Ti-Demo-MainFrame',
-    // },
+    keepSizes: {
+      keepMode: 'local',
+      keepAt: 'Ti-Demo-MainFrame',
+    },
     gridStyle: {
       backgroundColor: 'var(--ti-color-body)',
     },
