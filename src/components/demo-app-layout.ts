@@ -23,7 +23,7 @@ export function useDemoAppLayout(): LayoutGridProps {
       },
       {
         name: 'chute',
-        bar: { mode: 'column', position: 'next', adjustIndex: 2 },
+        bar: { mode: 'column', position: 'next', adjustIndex: 0 },
       },
       {
         name: 'arena',

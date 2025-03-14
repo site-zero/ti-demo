@@ -103,8 +103,7 @@
 
 <template>
   <TiLayoutGrid
-    v-bind="GUILayout"
-    :keep-frame="{ keepAt: 'Ti-Demo-MainFrame', keepMode: 'local' }">
+    v-bind="GUILayout">
     <template v-slot:default="block">
       <!--插槽: 顶栏-->
       <h1 v-if="'sky' == block.item.name" class="demo-sky">Ti Demo App</h1>
