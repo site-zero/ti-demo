@@ -15,7 +15,7 @@ import {
 } from '@site0/tijs';
 import { createApp } from 'vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
-import TiDemoApp from './TiDemoApp.vue';
+import TiDemoApp from './app/TiDemoApp.vue';
 import { DemoModalInfo } from './components/demo-modal/demo-modal-index';
 import { DemoTipsInfo } from './components/demo-tips/demo-tips-index';
 import PageDetail from './components/detail/PageDetail.vue';

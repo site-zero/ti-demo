@@ -1,0 +1,128 @@
+@use '@site0/tijs/sass/_all.scss' as *;
+
+nav {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  //   background-color: var(--ti-color-info-r);
+  //   color: var(--ti-color-info);
+  //-----------------------------------------------------
+  > div.nav-con {
+    position: relative;
+    padding: 0 0 32px 0;
+    width: 100%;
+    height: 100%;
+    //---------------------------------------------------
+    > aside {
+      @include pos-abs($b: 0, $l: 0, $r: 0, $h: 32px);
+      @include flex-align-nowrap($jc: space-between);
+      @include font-fixed;
+      padding: 0 2px 0 0.8em;
+      color: var(--ti-color-track);
+      border-top: 1px solid var(--ti-color-border-thin);
+      > span {
+        display: block;
+        font-size: 12px;
+        white-space: nowrap;
+        width: 10px;
+        flex: 1 1 auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      > a {
+        display: block;
+        text-decoration: none;
+        font-size: 12px;
+        opacity: 0.6;
+        transition: 0.6s;
+        padding: 0 0.5em;
+        &:hover {
+          opacity: 1;
+          background-color: var(--ti-color-mask-weak);
+        }
+      }
+    }
+    //---------------------------------------------------
+    > .nav-scroller {
+      padding: 0.4em;
+      font-size: var(--ti-fontsz-m);
+      line-height: 1.4em;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      //-------------------------------------------------
+      > h3 {
+        border-bottom: 1px solid var(--ti-color-border-shallow);
+        margin: 0;
+        padding: 0.2em;
+        font-size: SZ(10);
+        color: var(--ti-color-track);
+        em {
+          font-style: normal;
+          font-weight: normal;
+          opacity: 0.6;
+        }
+      }
+      //-------------------------------------------------
+      > section {
+        padding: SZ(10) 0;
+        @include flex-align($ai: stretch, $ac: stretch);
+
+        div.nav-item {
+          width: 5em;
+          margin: 0.1em;
+          //   --ti-color-selected: var(--ti-color-info);
+          //   --ti-color-selected-f: var(--ti-color-info-r);
+          --ti-color-link: var(--ti-color-info-b);
+          > a {
+            @include flex-align-v-nowrap($ai: center);
+            text-align: center;
+            cursor: pointer;
+            padding: 0.4em 0;
+            border-radius: var(--ti-measure-r-s);
+            span {
+              display: block;
+              font-size: 0.8em;
+              //white-space: nowrap;
+              width: 100%;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+            &:hover {
+              background-color: var(--ti-color-highlight);
+              text-decoration: none;
+              span {
+                text-decoration: underline;
+              }
+            }
+          }
+
+          &.is-current > a {
+            font-weight: bold;
+            background-color: var(--ti-color-selected);
+            color: var(--ti-color-selected-f);
+            cursor: default;
+            text-shadow: 1px 1px 3px var(--ti-color-mask-bushy);
+          }
+
+          &.is-ing > a {
+            color: var(--ti-color-warn);
+            > * {
+              opacity: 0.8;
+            }
+          }
+
+          &.is-scaffold > a {
+            color: var(--ti-color-track);
+            > * {
+              opacity: 0.8;
+            }
+          }
+        }
+      } // > section
+      //-------------------------------------------------
+    } // > .nav-scroller
+    //---------------------------------------------------
+  } //> div.nav-con {
+  //-----------------------------------------------------
+} // nav {

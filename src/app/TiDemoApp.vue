@@ -14,7 +14,7 @@
   } from '@site0/tijs';
   import JSON5 from 'json5';
   import { computed, onMounted, onUnmounted, provide, ref, watch } from 'vue';
-  import { useDemoAppLayout } from './components/demo-app-layout';
+  import { useDemoAppLayout } from './demo-app-layout';
   //-------------------------------------------------------
   // 准备提示信息
   const _app_tips = useTipManager();
@@ -102,11 +102,10 @@
 </script>
 
 <template>
-  <TiLayoutGrid
-    v-bind="GUILayout">
+  <TiLayoutGrid v-bind="GUILayout">
     <template v-slot:default="block">
       <!--插槽: 顶栏-->
-      <h1 v-if="'sky' == block.item.name" class="demo-sky">Ti Demo App</h1>
+      <h1 v-if="'sky' == block.item.name" class="demo-sky">TiJS</h1>
       <!--插槽: 侧边栏-->
       <RouterView
         v-else-if="'chute' == block.item.name"
@@ -136,11 +135,9 @@
     margin: 0;
     font-size: 18px;
     font-weight: bold;
-  }
-  nav.demo-chute {
-    position: absolute;
-    inset: 0;
-    overflow: auto;
+    background-color: var(--ti-color-info-r);
+    color: var(--ti-color-info);
+    border-bottom: 1px dashed var(--ti-color-info);
   }
   .demo-footer {
     @include flex-align-nowrap;

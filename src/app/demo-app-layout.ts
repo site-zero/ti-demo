@@ -23,6 +23,8 @@ export function useDemoAppLayout(): LayoutGridProps {
       },
       {
         name: 'chute',
+        overflowMode: 'cover',
+        grid: { gridRowStart: 2, gridRowEnd: 4 },
         bar: { mode: 'column', position: 'next', adjustIndex: 0 },
       },
       {
@@ -30,7 +32,7 @@ export function useDemoAppLayout(): LayoutGridProps {
       },
       {
         name: 'foot',
-        grid: { gridColumnStart: 1, gridColumnEnd: 3 },
+        grid: { gridColumnStart: 2, gridColumnEnd: 3 },
       },
     ],
   };
