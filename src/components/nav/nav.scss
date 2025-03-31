@@ -102,7 +102,12 @@ nav {
             background-color: var(--ti-color-selected);
             color: var(--ti-color-selected-f);
             cursor: default;
-            text-shadow: 1px 1px 3px var(--ti-color-mask-bushy);
+            text-shadow: -1px -1px 0 var(--ti-color-body),
+              0 -1px 0 var(--ti-color-body), 1px -1px 0 var(--ti-color-body),
+              -1px 0 0 var(--ti-color-body), 1px 0 0 var(--ti-color-body),
+              -1px 1px 0 var(--ti-color-body), 0 1px 0 var(--ti-color-body),
+              1px 1px 0 var(--ti-color-body),
+              1px 1px 5px var(--ti-color-mask-bushy);
           }
 
           &.is-ing > a {
