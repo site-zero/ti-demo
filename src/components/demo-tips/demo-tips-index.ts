@@ -10,8 +10,8 @@ let en = {
   'example-tips': 'Tips Box',
 };
 let cn = {
-  'com-name': '消息提示框演示',
-  'example-tips': '消息提示框',
+  'com-name': '提示框演示',
+  'example-tips': '提示框',
 };
 
 const DemoTipsInfo: TiComInfo = {
