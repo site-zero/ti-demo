@@ -1,39 +1,31 @@
 <script setup lang="ts">
   import { TI_TIPS_API } from '@site0/tijs';
-  import { inject, onMounted, onUnmounted, useTemplateRef } from 'vue';
+  import { inject, onUnmounted } from 'vue';
 
-  const _app_tips = inject(TI_TIPS_API);
-  const $main = useTemplateRef('main');
-  const _tips = _app_tips?.createComTips({
-    getScope: () => $main.value,
-    onMounted,
-    onUnmounted,
-  });
-  _tips?.addTip({
-    selector: 'th:first-child',
+  const _tips = inject(TI_TIPS_API);
+  const addTip = _tips!.createRegister(onUnmounted);
+  const t0 = addTip({
+    modifier: ['ALT', 'CTRL'],
     content:
       'Customizing TiTextSnippet in Vue 3 with Vite using JSX brings new flexibility.',
     dockMode: 'H-left',
     width: '120px',
     type: 'danger',
   });
-  _tips?.addTip({
-    selector: 'th:last-child',
+  const t1 = addTip({
     content:
       'Customizing TiTextSnippet in Vue 3 with Vite using JSX brings new flexibility.',
     dockMode: 'H-right',
     width: '120px',
     type: 'warn',
   });
-  _tips?.addTip({
-    selector: 'td:first-child',
+  const t2 = addTip({
     content:
       'Customizing TiTextSnippet in Vue 3 with Vite using JSX brings new flexibility.',
     dockMode: 'V-top',
     type: 'number',
   });
-  _tips?.addTip({
-    selector: 'td:last-child',
+  const t3 = addTip({
     content:
       'Customizing TiTextSnippet in Vue 3 with Vite using JSX brings new flexibility.',
     dockMode: 'V-bottom',
@@ -46,9 +38,9 @@
     <section class="as-links">
       <a
         href="#"
-        data-tip-id="AAA"
-        data-tip-content="Customizing TiTextSnippet in Vue 3 with Vite using JSX brings new flexibility."
-        data-tip-padding="b">
+        data-tip="Customizing TiTextSnippet in Vue 3 with Vite using JSX brings new flexibility."
+        data-tip-padding="b"
+        data-tip-modifier="ALT+SHIFT">
         Hover to show tip
       </a>
     </section>
@@ -57,14 +49,14 @@
       <table border="1">
         <thead>
           <tr>
-            <th>H-left</th>
-            <th>H-right</th>
+            <th><span :data-tip="`::${t0}`">H-left</span></th>
+            <th><span :data-tip="`::${t1}`">H-right</span></th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>V-top</td>
-            <td>V-bottom</td>
+            <td><span :data-tip="`::${t2}`">V-top</span></td>
+            <td><span :data-tip="`::${t3}`">V-bottom</span></td>
           </tr>
         </tbody>
       </table>

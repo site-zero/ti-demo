@@ -5,23 +5,22 @@
     DateTime,
     Dom,
     Num,
+    TIPS,
     TI_TIPS_API,
     TiLayoutGrid,
     TiStore,
     createAppBus,
-    useTipManager,
     watchAppResize,
   } from '@site0/tijs';
   import JSON5 from 'json5';
-  import { computed, onMounted, onUnmounted, provide, ref, watch } from 'vue';
+  import { computed, onUnmounted, provide, ref, watch } from 'vue';
   import { useDemoAppLayout } from './demo-app-layout';
   //-------------------------------------------------------
   // 准备提示信息
-  const _app_tips = useTipManager();
   let $app_el = Dom.find('#app');
   if ($app_el) {
-    let tips = _app_tips.createAppTipSet($app_el);
-    provide(TI_TIPS_API, tips);
+    provide(TI_TIPS_API, TIPS.api);
+    TIPS.watchDocumentForTips($app_el.ownerDocument.body);
   }
   //--------------------------------------------------
   //
@@ -94,10 +93,6 @@
       immediate: true,
     }
   );
-  //-------------------------------------------------------
-  onMounted(() => {
-    _app_tips.watchDocumentBody();
-  });
   //-------------------------------------------------------
 </script>
 
