@@ -108,6 +108,9 @@ nav {
               -1px 1px 0 var(--ti-color-body), 0 1px 0 var(--ti-color-body),
               1px 1px 0 var(--ti-color-body),
               1px 1px 5px var(--ti-color-mask-bushy);
+            // -webkit-text-stroke: 1px var(--ti-color-body);
+            // -moz-text-stroke: 1px var(--ti-color-body);
+            // font-weight: bold;
           }
 
           &.is-ing > a {

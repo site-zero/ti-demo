@@ -5,8 +5,8 @@
     DateTime,
     Dom,
     Num,
-    TIPS,
-    TI_TIPS_API,
+    TI_APP_TIPS,
+    TI_TIP_API_KEY,
     TiLayoutGrid,
     TiStore,
     createAppBus,
@@ -19,8 +19,8 @@
   // 准备提示信息
   let $app_el = Dom.find('#app');
   if ($app_el) {
-    provide(TI_TIPS_API, TIPS.api);
-    TIPS.watchDocumentForTips($app_el.ownerDocument.body);
+    provide(TI_TIP_API_KEY, TI_APP_TIPS.api);
+    TI_APP_TIPS.watchDocumentForTips($app_el.ownerDocument.body);
   }
   //--------------------------------------------------
   //
