@@ -3,8 +3,7 @@
   import { inject, onUnmounted } from 'vue';
 
   const _tips_api = inject(TI_TIP_API_KEY);
-  const _tips = _tips_api!.createRegister(onUnmounted);
-  const t0 = _tips.addTip({
+  const t0 = _tips_api!.addTip({
     modifier: 'CTRL',
     content:
       'Customizing TiTextSnippet in Vue 3 with Vite using JSX brings new flexibility.',
@@ -12,24 +11,28 @@
     width: '120px',
     type: 'danger',
   });
-  const t1 = _tips.addTip({
+  const t1 = _tips_api!.addTip({
     content:
       'Customizing TiTextSnippet in Vue 3 with Vite using JSX brings new flexibility.',
     dockMode: 'H-right',
     width: '120px',
     type: 'warn',
   });
-  const t2 = _tips.addTip({
+  const t2 = _tips_api!.addTip({
     content:
       'Customizing TiTextSnippet in Vue 3 with Vite using JSX brings new flexibility.',
     dockMode: 'V-top',
     type: 'number',
   });
-  const t3 = _tips.addTip({
+  const t3 = _tips_api!.addTip({
     content:
       'Customizing TiTextSnippet in Vue 3 with Vite using JSX brings new flexibility.',
     dockMode: 'V-bottom',
     type: 'text',
+  });
+
+  onUnmounted(() => {
+    _tips_api?.removeTip(t0, t1, t2, t3);
   });
 </script>
 <template>
@@ -40,7 +43,7 @@
         href="#"
         data-tip="Customizing TiTextSnippet in Vue 3 with Vite using JSX brings new flexibility."
         data-tip-padding="b"
-        data-tip-modifier="ALT+SHIFT">
+        data-tip-modifier="ALT">
         Hover to show tip
       </a>
     </section>
