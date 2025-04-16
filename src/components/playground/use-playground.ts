@@ -1,7 +1,7 @@
 import {
   DeltaUpdateMode,
   EmitAdaptor,
-  EmitAdaptorPayload,
+  EmitAdaptorEvent,
   I18n,
   StrOptionItem,
   TiAppBus,
@@ -46,7 +46,7 @@ export function usePlayground(
     }
   }
 
-  function __handle_sub_event(event: EmitAdaptorPayload) {
+  function __handle_sub_event(event: EmitAdaptorEvent) {
     let { eventName, data: payload } = event;
     //console.log('__handle_sub_event', eventName, payload);
     _bus.emit(eventName, payload);
