@@ -21,6 +21,6 @@ export default defineConfig({
   },
   build: {
     // 单位是 KB
-    chunkSizeWarningLimit: 2000,
+    chunkSizeWarningLimit: 3000,
   },
 });
