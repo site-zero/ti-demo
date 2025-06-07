@@ -39,7 +39,7 @@ tidyLogger();
 const demos = {
   DemoModal: DemoModalInfo,
   DemoTips: DemoTipsInfo,
-  LeafletMap: LeafletMapInfo,
+  //LeafletMap: LeafletMapInfo,
 } as TiComSet;
 tiPutComponents(demos);
 

@@ -100,7 +100,7 @@
   <TiLayoutGrid v-bind="GUILayout">
     <template v-slot:default="block">
       <!--插槽: 顶栏-->
-      <h1 v-if="'sky' == block.item.name" class="demo-sky">TiJS</h1>
+      <h1 v-if="'sky' == block.item.name" class="demo-sky"><a href="/">TiJS</a></h1>
       <!--插槽: 侧边栏-->
       <RouterView
         v-else-if="'chute' == block.item.name"

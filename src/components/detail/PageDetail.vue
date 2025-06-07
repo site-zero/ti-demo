@@ -1,9 +1,9 @@
 <script setup lang="ts">
-  import { TiIcon, tiCheckComponent } from '@site0/tijs';
-  import { computed } from 'vue';
-  import Playground from '../playground/Playground.vue';
+  import { TiIcon, tiCheckComponent, tiGetComponent } from "@site0/tijs";
+  import { computed } from "vue";
+  import Playground from "../playground/Playground.vue";
 
-  const emit = defineEmits(['toggle:theme_color']);
+  const emit = defineEmits(["toggle:theme_color"]);
   /*-------------------------------------------------------
 
                       Props
@@ -12,12 +12,12 @@
   const props = defineProps({
     comType: {
       type: String,
-      default: 'TiUnkown',
+      default: "TiUnkown",
     },
     example: String,
     theme_color: {
       type: String,
-      default: 'auto-color-mode',
+      default: "auto-color-mode",
     },
   });
   /*-------------------------------------------------------
@@ -26,21 +26,21 @@
 
 -------------------------------------------------------*/
   const CurrentCom = computed(() => {
-    return tiCheckComponent(props.comType);
+    return tiGetComponent(props.comType);
   });
 
   const ComEvents = computed(() => {
-    return CurrentCom.value.events;
+    return CurrentCom.value?.events;
   });
 
   const ThemeColorIcon = computed(() => {
     switch (props.theme_color) {
-      case 'light':
-        return 'fas-sun';
-      case 'dark':
-        return 'fas-moon';
+      case "light":
+        return "fas-sun";
+      case "dark":
+        return "fas-moon";
       default:
-        return 'fas-cloud-sun';
+        return "fas-cloud-sun";
     }
   });
 
@@ -53,27 +53,30 @@
 
 <template>
   <div class="page-detail cover-parent">
-    <h3>
-      <TiIcon :value="CurrentCom.icon" class="s32" />
-      <span>{{ CurrentCom.toString() }}</span>
-      <a @click="emit('toggle:theme_color')" :title="theme_color">
-        <TiIcon class="s24" :value="ThemeColorIcon" />
-      </a>
-    </h3>
-    <blockquote v-if="ComEvents.length > 0">
-      <ul>
-        <li v-for="enm in ComEvents">
-          <i class="fa-solid fa-bolt"></i>
-          <span>{{ enm }}</span>
-        </li>
-      </ul>
-    </blockquote>
-    <Playground :comType="comType" :example="example" />
+    <div v-if="!CurrentCom">Please Choose On Component</div>
+    <template v-else>
+      <h3>
+        <TiIcon :value="CurrentCom.icon" class="s32" />
+        <span>{{ CurrentCom.toString() }}</span>
+        <a @click="emit('toggle:theme_color')" :title="theme_color">
+          <TiIcon class="s24" :value="ThemeColorIcon" />
+        </a>
+      </h3>
+      <blockquote v-if="ComEvents && ComEvents.length > 0">
+        <ul>
+          <li v-for="enm in ComEvents">
+            <i class="fa-solid fa-bolt"></i>
+            <span>{{ enm }}</span>
+          </li>
+        </ul>
+      </blockquote>
+      <Playground :comType="comType" :example="example" />
+    </template>
   </div>
 </template>
 
 <style scoped lang="scss">
-  @use '@site0/tijs/sass/_all.scss' as *;
+  @use "@site0/tijs/sass/_all.scss" as *;
 
   .page-detail {
     @include flex-align-v-nowrap;
