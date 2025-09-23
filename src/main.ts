@@ -6,12 +6,9 @@ import {
   MessageMap,
   TiComSet,
   TiDict,
-  addLogger,
   installTiComponents,
   installTiCoreI18n,
-  setDefaultLogLevel,
   tiPutComponents,
-  tidyLogger,
 } from "@site0/tijs";
 import { createApp } from "vue";
 import { createRouter, createWebHashHistory } from "vue-router";
@@ -27,12 +24,6 @@ import "./style.scss";
 let cn = zh_cn as MessageMap;
 let en = en_us as MessageMap;
 
-setDefaultLogLevel(LogLevel.WARN);
-addLogger("ti", LogLevel.WARN);
-addLogger("Ti", LogLevel.WARN);
-//addLogger('ti.use-app-model-binding', LogLevel.DEBUG);
-//addLogger('TiTable', LogLevel.DEBUG);
-tidyLogger();
 //
 // 准备自定义控件
 //
