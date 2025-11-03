@@ -54,6 +54,10 @@ export function usePlayground(
 
     // 处理属性更新
     let model = comInfo.exampleModel;
+    if(_.isFunction(model)){
+      model(eventName, payload);
+      return;
+    }
     let target = model[eventName];
 
     // 看来需要处理
