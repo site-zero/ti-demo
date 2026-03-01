@@ -54,7 +54,7 @@ export function usePlayground(
 
     // 处理属性更新
     let model = comInfo.exampleModel;
-    if(_.isFunction(model)){
+    if (_.isFunction(model)) {
       model(eventName, payload);
       return;
     }
@@ -193,6 +193,7 @@ export function usePlayground(
       },
       EDIT: {},
       SHELF: {},
+      INNER: {},
       ACTION: {
         display: "flex",
         alignItems: "center",
@@ -226,6 +227,7 @@ export function usePlayground(
       EDIT: {},
       SHELF: {},
       ACTION: {},
+      INNER: {},
       TILE: {
         display: "flex",
         maxWidth: "500px",
