@@ -2,10 +2,11 @@ import {
   Dicts,
   I18n,
   I18nSet,
-  LogLevel,
   MessageMap,
   TiComSet,
   TiDict,
+  init_ti_std_columns,
+  init_ti_std_fields,
   installTiComponents,
   installTiCoreI18n,
   tiPutComponents,
@@ -13,7 +14,6 @@ import {
 import { createApp } from "vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 import TiDemoApp from "./app/TiDemoApp.vue";
-import { LeafletMapInfo } from "./components/demo-leaflet-map/leaflet-map-index";
 import { DemoModalInfo } from "./components/demo-modal/demo-modal-index";
 import { DemoTipsInfo } from "./components/demo-tips/demo-tips-index";
 import PageDetail from "./components/detail/PageDetail.vue";
@@ -48,6 +48,12 @@ let langKey = I18n.toLangKey(lang);
 I18n.putAll(app_i18ns[langKey]);
 installTiCoreI18n(lang, true);
 //updateInstalledComponentsLangs(langKey);
+
+//
+// 内置表单字段
+//
+init_ti_std_fields();
+init_ti_std_columns();
 
 // setEnv('comDefaultProps',{
 //   TiLabel: {

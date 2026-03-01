@@ -1,6 +1,6 @@
-import { TiComInfo, TiComRace, tiFindComponents } from '@site0/tijs';
-import _ from 'lodash';
-import { Ref } from 'vue';
+import { TiComInfo, TiComRace, tiFindComponents } from "@site0/tijs";
+import _ from "lodash";
+import { Ref } from "vue";
 //-----------------------------------------------------
 export interface NavItem extends TiComInfo {
   icon: string;
@@ -23,7 +23,7 @@ export function buildNavItemGroups(_com_count: Ref<number>) {
   // 归纳
   _com_count.value = 0;
   for (let comInfo of allComs) {
-    if (comInfo.asInner) {
+    if (comInfo.asInner || comInfo.race === TiComRace.INNER) {
       continue;
     }
     _com_count.value += 1;
@@ -45,7 +45,7 @@ export function buildNavItemGroups(_com_count: Ref<number>) {
     groups.push({
       race: race as TiComRace,
       text: race,
-      items: _.sortBy(items, 'name'),
+      items: _.sortBy(items, "name"),
     });
   });
   return groups.reverse();
