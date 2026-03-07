@@ -44,6 +44,7 @@ const app_i18ns = {
   en_uk: en,
 } as I18nSet;
 let lang = "zh-cn";
+//let lang = "en-uk";
 let langKey = I18n.toLangKey(lang);
 I18n.putAll(app_i18ns[langKey]);
 installTiCoreI18n(lang, true);
