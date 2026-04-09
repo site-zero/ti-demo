@@ -1,0 +1,17 @@
+export const DD_CURRENCY = [
+  { value: "AUD", text: "Australian Dollar" },
+  { value: "BRL", text: "Brazilian Real" },
+  { value: "CAD", text: "Canadian Dollar" },
+  { value: "CHF", text: "Swiss Franc" },
+  { value: "CNY", text: "Chinese Yuan" },
+  { value: "EUR", text: "Euro" },
+  { value: "GBP", text: "British Pound" },
+  { value: "HKD", text: "Hong Kong Dollar" },
+  { value: "JPY", text: "Japanese Yen" },
+  { value: "KRW", text: "South Korean Won" },
+  { value: "MXN", text: "Mexican Peso" },
+  { value: "NZD", text: "New Zealand Dollar" },
+  { value: "PHP", text: "Philippine Peso" },
+  { value: "RUB", text: "Russian Ruble" },
+  { value: "USD", text: "US Dollar" },
+];

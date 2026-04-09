@@ -21,6 +21,7 @@ import NavCom from "./components/nav/NavCom.vue";
 import en_us from "./i18n/en-us.json";
 import zh_cn from "./i18n/zh-cn.json";
 import "./style.scss";
+import { DD_COUNTRY, DD_CURRENCY, DD_QUANTITY } from "./support";
 let cn = zh_cn as MessageMap;
 let en = en_us as MessageMap;
 
@@ -104,41 +105,9 @@ function createDemoDict(name: string, path: string) {
 //
 createDemoDict("hello", "/test?limit=10");
 createDemoDict("hello100", "/test?limit=100");
-Dicts.getOrCreate(
-  Dicts.makeDictOptions({
-    data: [
-      { value: "AUD", text: "Australian Dollar" },
-      { value: "CNY", text: "Chinese Yuan" },
-      { value: "EUR", text: "Euro" },
-      { value: "GBP", text: "British Pound" },
-      { value: "HKD", text: "Hong Kong Dollar" },
-      { value: "JPY", text: "Japanese Yen" },
-      { value: "USD", text: "US Dollar" },
-    ],
-  }),
-  "Currencies"
-);
-Dicts.getOrCreate(
-  Dicts.makeDictOptions({
-    data: [
-      { value: "G", text: "GRAM" },
-      { value: "HG", text: "HECTOGRAM" },
-      { value: "KG", text: "KILOGRAM" },
-      { value: "T", text: "TONNE" },
-    ],
-  }),
-  "WeightUnits"
-);
-Dicts.getOrCreate(
-  Dicts.makeDictOptions({
-    data: [
-      { value: "CC", text: "CM3", tip: "CUBIC CENTIMETRE" },
-      { value: "C8", text: "DM3", tip: "CUBIC DECIMETRE" },
-      { value: "CU", text: "M3", tip: "CUBIC METRE" },
-    ],
-  }),
-  "VolumeUnits"
-);
+Dicts.getOrCreate(Dicts.makeDictOptions({ data: DD_CURRENCY }), "Currencies");
+Dicts.getOrCreate(Dicts.makeDictOptions({ data: DD_QUANTITY }), "Quantities");
+Dicts.getOrCreate(Dicts.makeDictOptions({ data: DD_COUNTRY }), "Countries");
 
 //
 // 准备路由
