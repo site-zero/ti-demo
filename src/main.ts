@@ -22,6 +22,8 @@ import en_us from "./i18n/en-us.json";
 import zh_cn from "./i18n/zh-cn.json";
 import "./style.scss";
 import { DD_COUNTRY, DD_CURRENCY, DD_QUANTITY } from "./support";
+import { DD_COLOR_THEME } from "./support/dd-color-theme";
+import { DD_LANG } from "./support/dd-lang";
 let cn = zh_cn as MessageMap;
 let en = en_us as MessageMap;
 
@@ -108,6 +110,11 @@ createDemoDict("hello100", "/test?limit=100");
 Dicts.getOrCreate(Dicts.makeDictOptions({ data: DD_CURRENCY }), "Currencies");
 Dicts.getOrCreate(Dicts.makeDictOptions({ data: DD_QUANTITY }), "Quantities");
 Dicts.getOrCreate(Dicts.makeDictOptions({ data: DD_COUNTRY }), "Countries");
+Dicts.getOrCreate(Dicts.makeDictOptions({ data: DD_LANG }), "Languages");
+Dicts.getOrCreate(
+  Dicts.makeDictOptions({ data: DD_COLOR_THEME }),
+  "ColorThemes"
+);
 
 //
 // 准备路由
