@@ -1,4 +1,4 @@
-import { registerHmComponents } from '@site0/hyper-maker';
+import { initHyperMaker } from "@site0/hyper-maker";
 import {
   Dicts,
   I18n,
@@ -11,6 +11,7 @@ import {
   installTiComponents,
   installTiCoreI18n,
   tiPutComponents,
+  updateInstalledComponentsLangs,
 } from "@site0/tijs";
 import { createApp } from "vue";
 import { createRouter, createWebHashHistory } from "vue-router";
@@ -27,10 +28,6 @@ import { DD_COLOR_THEME } from "./support/dd-color-theme";
 import { DD_LANG } from "./support/dd-lang";
 let cn = zh_cn as MessageMap;
 let en = en_us as MessageMap;
-
-
-// 注册 Hyper Maker 组件
-registerHmComponents();
 
 //
 // 准备自定义控件
@@ -55,8 +52,10 @@ let lang = "zh-cn";
 //let lang = "en-uk";
 let langKey = I18n.toLangKey(lang);
 I18n.putAll(app_i18ns[langKey]);
-installTiCoreI18n(lang, true);
-//updateInstalledComponentsLangs(langKey);
+installTiCoreI18n(langKey);
+
+// 注册 Hyper Maker 组件
+initHyperMaker(langKey);
 
 //
 // 内置表单字段
@@ -152,5 +151,10 @@ let router = createRouter({
 let app = createApp(TiDemoApp);
 //app.config.devtools = true;
 installTiComponents(app);
+
+// 所有控件都注册完毕了，那么就整体更换一遍语言
+updateInstalledComponentsLangs(langKey);
+
+// 开启路由和挂在应用
 app.use(router);
 app.mount("#app");

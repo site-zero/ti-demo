@@ -1,8 +1,8 @@
 import { LayoutGridProps } from '@site0/tijs';
 import { PlaygroundLayoutMode } from './playground-types';
-import { PlaygroundFeature } from './use-playground-api';
+import { PlaygroundApi } from './use-playground-api';
 
-const LAYOUTS: Record<PlaygroundLayoutMode, (api: PlaygroundFeature) => LayoutGridProps> = {
+const LAYOUTS: Record<PlaygroundLayoutMode, (api: PlaygroundApi) => LayoutGridProps> = {
   //-------------------------------------
   // 左右布局
   //-------------------------------------
@@ -169,7 +169,7 @@ const LAYOUTS: Record<PlaygroundLayoutMode, (api: PlaygroundFeature) => LayoutGr
   }),
 }
 
-export function usePlaygroundLayout(api: PlaygroundFeature): LayoutGridProps {
+export function usePlaygroundLayout(api: PlaygroundApi): LayoutGridProps {
   let layout = LAYOUTS[api.LayoutMode.value];
   return layout(api);
 }

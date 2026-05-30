@@ -21,7 +21,7 @@ import {
   PlaygroundProps,
 } from "./playground-types";
 
-export type PlaygroundFeature = ReturnType<typeof usePlaygroundApi>;
+export type PlaygroundApi = ReturnType<typeof usePlaygroundApi>;
 
 export function usePlaygroundApi(
   props: PlaygroundProps,
@@ -35,15 +35,28 @@ export function usePlaygroundApi(
   const _cus_config_var = ref<Vars>();
   const _cus_config_txt = ref<string>();
 
-  function onComConfChange(input: string) {
+  function onComConfChange(input: string | Vars) {
     //console.log('onComConfigChange', typeof input, input);
-    try {
-      let config = JSON5.parse(input);
-      _cus_config_txt.value = input;
-      _cus_config_var.value = config;
-    } catch (err) {
-      //console.info('parse error', err);
+    let config: Vars = {};
+    let text = "{}";
+
+    // 归一化输入的控件配置参数
+    if (_.isString(input)) {
+      text = input;
+      try {
+        config = JSON5.parse(input);
+      } catch (err) {
+        console.warn("onComConfChange parse error", err);
+        return;
+      }
+    } else {
+      config = input || {};
+      text = JSON5.stringify(config, null, 2);
     }
+
+    // 更新状态
+    _cus_config_txt.value = text;
+    _cus_config_var.value = config;
   }
 
   function __handle_sub_event(event: EmitAdaptorEvent) {

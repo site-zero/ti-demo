@@ -1,11 +1,11 @@
 import { LayoutSchema, SwitcherProps } from "@site0/tijs";
 import { HmEditComProps } from "../../../../hyper-maker/src";
 import { PlaygroundProps } from "./playground-types";
-import { PlaygroundFeature } from "./use-playground-api";
+import { PlaygroundApi } from "./use-playground-api";
 
 export function usePlaygroundSchema(
   props: PlaygroundProps,
-  api: PlaygroundFeature
+  api: PlaygroundApi
 ): LayoutSchema {
   const configText = api._cus_config_txt.value;
   const configVars = api._cus_config_var.value;
@@ -103,7 +103,7 @@ export function usePlaygroundSchema(
       } as HmEditComProps,
       events: {
         change: ({ data }) => {
-          console.log("conf change", data);
+          //console.log("conf change", data);
           api.onComConfChange(data);
         },
       },
