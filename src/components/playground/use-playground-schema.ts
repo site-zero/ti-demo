@@ -1,6 +1,7 @@
-import { CodeEditorProps, LayoutSchema, SwitcherProps } from '@site0/tijs';
-import { PlaygroundProps } from './playground-types';
-import { PlaygroundFeature } from './use-playground';
+import { LayoutSchema, SwitcherProps } from "@site0/tijs";
+import { HmEditComProps } from "../../../../hyper-maker/src";
+import { PlaygroundProps } from "./playground-types";
+import { PlaygroundFeature } from "./use-playground-api";
 
 export function usePlaygroundSchema(
   props: PlaygroundProps,
@@ -11,66 +12,66 @@ export function usePlaygroundSchema(
   const exOptions = api.getExampleOptions();
   return {
     tabs: {
-      comType: 'TiSwitcher',
+      comType: "TiSwitcher",
       comConf: {
-        style: { padding: '.4em' },
+        style: { padding: ".4em" },
         options: exOptions,
         value: api.exampleName,
       },
       events: {
         change: ({ data }) => {
-          console.log('tabs change', data);
+          console.log("tabs change", data);
           api.selectExample(data);
         },
       },
     },
     modes: {
-      comType: 'TiSwitcher',
+      comType: "TiSwitcher",
       comConf: {
         value: api.LayoutMode.value,
-        style: { padding: '.4em' },
-        defaultItemType: 'success',
-        itemGap: 't',
-        itemRadius: 't',
+        style: { padding: ".4em" },
+        defaultItemType: "success",
+        itemGap: "t",
+        itemRadius: "t",
         options: [
-          { value: 'LR', icon: 'fas-table-columns' },
-          { value: 'TB', icon: 'zmdi-view-agenda' },
-          { value: 'FU', icon: 'zmdi-view-carousel' },
+          { value: "LR", icon: "fas-table-columns" },
+          { value: "TB", icon: "zmdi-view-agenda" },
+          { value: "FU", icon: "zmdi-view-carousel" },
         ],
       } as SwitcherProps,
       events: {
         change: ({ data }) => {
-          console.log('layout change', data);
-          if (data == 'LR') {
-            api.setLayoutMode('LR');
-          } else if (data == 'TB') {
-            api.setLayoutMode('TB');
+          console.log("layout change", data);
+          if (data == "LR") {
+            api.setLayoutMode("LR");
+          } else if (data == "TB") {
+            api.setLayoutMode("TB");
           } else {
-            api.setLayoutMode('FU');
+            api.setLayoutMode("FU");
           }
         },
       },
     },
     bgs: {
-      comType: 'TiSwitcher',
+      comType: "TiSwitcher",
       comConf: {
         value: api.BackgroundMode.value,
-        style: { padding: '.4em' },
-        defaultItemType: 'number',
-        itemGap: 't',
-        itemRadius: 't',
+        style: { padding: ".4em" },
+        defaultItemType: "number",
+        itemGap: "t",
+        itemRadius: "t",
         options: [
-          { value: 'transparent', icon: 'fas-chess-board' },
-          { value: 'filled', icon: 'fas-fill' },
+          { value: "transparent", icon: "fas-chess-board" },
+          { value: "filled", icon: "fas-fill" },
         ],
       } as SwitcherProps,
       events: {
         change: ({ data }) => {
-          console.log('bg change', data);
-          if ('filled' == data) {
-            api.setBackground('filled');
+          console.log("bg change", data);
+          if ("filled" == data) {
+            api.setBackground("filled");
           } else {
-            api.setBackground('transparent');
+            api.setBackground("transparent");
           }
         },
       },
@@ -80,16 +81,29 @@ export function usePlaygroundSchema(
       comConf: configVars,
       events: api.getLiveEventHandlers(),
     },
+    // conf: {
+    //   comType: 'TiCodeEditor',
+    //   comConf: {
+    //     className: 'fit-parent',
+    //     value: configText,
+    //     type: 'json5',
+    //   } as CodeEditorProps,
+    //   events: {
+    //     change: ({ data }) => {
+    //       // console.log('conf change', data);
+    //       api.onComConfChange(data);
+    //     },
+    //   },
+    // },
     conf: {
-      comType: 'TiCodeEditor',
+      comType: "HmEditCom",
       comConf: {
-        className: 'fit-parent',
-        value: configText,
-        type: 'json5',
-      } as CodeEditorProps,
+        comType: props.comType,
+        comConf: configVars,
+      } as HmEditComProps,
       events: {
         change: ({ data }) => {
-          // console.log('conf change', data);
+          console.log("conf change", data);
           api.onComConfChange(data);
         },
       },

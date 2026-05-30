@@ -21,9 +21,9 @@ import {
   PlaygroundProps,
 } from "./playground-types";
 
-export type PlaygroundFeature = ReturnType<typeof usePlayground>;
+export type PlaygroundFeature = ReturnType<typeof usePlaygroundApi>;
 
-export function usePlayground(
+export function usePlaygroundApi(
   props: PlaygroundProps,
   _bus: TiAppBus,
   router: Router,

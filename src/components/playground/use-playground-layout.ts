@@ -1,6 +1,6 @@
 import { LayoutGridProps } from '@site0/tijs';
 import { PlaygroundLayoutMode } from './playground-types';
-import { PlaygroundFeature } from './use-playground';
+import { PlaygroundFeature } from './use-playground-api';
 
 const LAYOUTS: Record<PlaygroundLayoutMode, (api: PlaygroundFeature) => LayoutGridProps> = {
   //-------------------------------------

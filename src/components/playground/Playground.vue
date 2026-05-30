@@ -7,7 +7,7 @@
     PlaygroundLayoutMode,
     PlaygroundProps,
   } from './playground-types';
-  import { usePlayground } from './use-playground';
+  import { usePlaygroundApi } from './use-playground-api';
   import { usePlaygroundLayout } from './use-playground-layout';
   import { usePlaygroundSchema } from './use-playground-schema';
   //--------------------------------------------------
@@ -19,7 +19,7 @@
   const _layout_mode = ref<PlaygroundLayoutMode>('LR');
   const _background = ref<PlaygroundBackground>('filled');
   const api = computed(() =>
-    usePlayground(props, _bus!, router, _layout_mode, _background)
+    usePlaygroundApi(props, _bus!, router, _layout_mode, _background)
   );
   //--------------------------------------------------
   const GUILayout = computed(() => usePlaygroundLayout(api.value));

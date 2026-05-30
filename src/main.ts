@@ -1,3 +1,4 @@
+import { registerHmComponents } from '@site0/hyper-maker';
 import {
   Dicts,
   I18n,
@@ -26,6 +27,10 @@ import { DD_COLOR_THEME } from "./support/dd-color-theme";
 import { DD_LANG } from "./support/dd-lang";
 let cn = zh_cn as MessageMap;
 let en = en_us as MessageMap;
+
+
+// 注册 Hyper Maker 组件
+registerHmComponents();
 
 //
 // 准备自定义控件
@@ -146,6 +151,6 @@ let router = createRouter({
 //
 let app = createApp(TiDemoApp);
 //app.config.devtools = true;
-app.use(router);
 installTiComponents(app);
+app.use(router);
 app.mount("#app");
