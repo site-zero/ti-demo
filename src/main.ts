@@ -4,20 +4,17 @@ import {
   I18n,
   I18nSet,
   MessageMap,
-  TiComSet,
   TiDict,
   init_ti_std_columns,
   init_ti_std_fields,
   installTiComponents,
   installTiCoreI18n,
-  tiPutComponents,
-  updateInstalledComponentsLangs,
+  updateInstalledComponentsLangs
 } from "@site0/tijs";
 import { createApp } from "vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 import TiDemoApp from "./app/TiDemoApp.vue";
-import { DemoModalInfo } from "./components/demo-modal/demo-modal-index";
-import { DemoTipsInfo } from "./components/demo-tips/demo-tips-index";
+import { install_demo_components } from "./components";
 import PageDetail from "./components/detail/PageDetail.vue";
 import NavCom from "./components/nav/NavCom.vue";
 import en_us from "./i18n/en-us.json";
@@ -31,13 +28,7 @@ let en = en_us as MessageMap;
 
 //
 // 准备自定义控件
-//
-const demos = {
-  DemoModal: DemoModalInfo,
-  DemoTips: DemoTipsInfo,
-  //LeafletMap: LeafletMapInfo,
-} as TiComSet;
-tiPutComponents(demos);
+install_demo_components();
 
 //
 // 准备多国语言
