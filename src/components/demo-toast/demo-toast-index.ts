@@ -12,7 +12,7 @@ const zh_cn = {
 };
 
 const DemoToastInfo: TiComInfo = {
-  icon: "fas-address-book",
+  icon: "far-message",
   race: TiComRace.ACTION,
   name: COM_TYPE,
   text: "i18n:demo-toast-com-name",
