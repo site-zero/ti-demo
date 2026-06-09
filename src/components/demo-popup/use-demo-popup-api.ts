@@ -1,10 +1,14 @@
 import {
   DataValidation,
   I18n,
-  PopPosition
+  PopPosition,
+  StrOptionItem,
+  toPopPosition,
+  Vars
 } from "@site0/tijs";
-import { computed } from "vue";
-import { DemoPopupEmitter, DemoPopupProps } from "./demo-popup-types";
+import _ from "lodash";
+import { computed, ref } from "vue";
+import { DemoPopupEmitter, DemoPopupPayload, DemoPopupProps } from "./demo-popup-types";
 
 export type DemoPopupApi = ReturnType<typeof useDemoPopupApi>;
 export type DemoPopupSetup = {
@@ -12,7 +16,7 @@ export type DemoPopupSetup = {
   getValidation?: () => DataValidation | undefined,
 }
 //-----------------------------------------------------
-export const PopupPositions: PopPosition[] = [
+export const _positions: PopPosition[] = [
   "left-top",
   "top",
   "right-top",
@@ -32,7 +36,9 @@ export function useDemoPopupApi(
   //-----------------------------------------------------
   // 数据模型
   //-----------------------------------------------------
-
+  const _data = ref<Vars>({
+    logicType: props.defaultType ?? 'primary',
+  })
   //-----------------------------------------------------
   // 计算属性
   //-----------------------------------------------------
@@ -43,29 +49,46 @@ export function useDemoPopupApi(
     return 'Demo Popup';
   })
   //-----------------------------------------------------
+  const PopupPositions = computed((): StrOptionItem[] => {
+    let re: StrOptionItem[] = [];
+    for (let pos of _positions) {
+      re.push({
+        value: pos,
+        text: _.upperCase(pos)
+      })
+    }
+    return re;
+  });
+  //-----------------------------------------------------
   // 操作函数
   //-----------------------------------------------------
-  function onClick(pos: PopPosition) {
-    console.log("click", pos);
+  function onClick(it: StrOptionItem) {
+    console.log("click", it);
+    let pos: PopPosition = toPopPosition(it.value);
     if (props.handler) {
-      props.handler({ pos, logicType: props.defaultType ?? 'primary' })
+      let payload: DemoPopupPayload = {
+        pos,
+        ..._data.value,
+      }
+      props.handler(payload);
     }
   }
-
   //-----------------------------------------------------
   // 数据改动
   //-----------------------------------------------------
-
+  function onFormChange(delta: Vars) {
+    _.assign(_data.value, delta);
+  }
   //-----------------------------------------------------
   // 返回接口
   //-----------------------------------------------------
   return {
     // 计算属性
     Title,
+    PopupPositions,
     // 操作函数
     onClick,
     // 数据改动
-    // 远程操作
-
+    onFormChange,
   };
 }

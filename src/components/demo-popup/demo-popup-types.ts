@@ -13,7 +13,7 @@ export type DemoPopupProps = CommonProps & {
 
 export type DemoPopupPayload = {
   pos: PopPosition;
-  logicType: LogicType | null;
+  logicType?: LogicType | null;
 }
 
 export type DemoPopupHandler = (payload: DemoPopupPayload) => void;

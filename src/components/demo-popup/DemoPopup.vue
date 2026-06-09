@@ -3,7 +3,7 @@
   import _ from "lodash";
   import { use_demo_popup_form } from "./demo-popup-form";
   import { DemoPopupEmitter, DemoPopupProps } from "./demo-popup-types";
-  import { PopupPositions, useDemoPopupApi } from "./use-demo-popup-api";
+  import { useDemoPopupApi } from "./use-demo-popup-api";
   //-----------------------------------------------------
   const emit = defineEmits<DemoPopupEmitter>();
   const props = withDefaults(defineProps<DemoPopupProps>(), {});
@@ -16,11 +16,11 @@
   <div class="demo-popup">
     <h4>{{ api.Title.value }}</h4>
     <main>
-      <a v-for="pos in PopupPositions" @click.left="api.onClick(pos)">
-        {{ _.upperFirst(pos) }}
+      <a v-for="it in api.PopupPositions.value" @click.left="api.onClick(it)">
+        {{ it.text }}
       </a>
     </main>
-    <TiForm v-bind="FormConfig" />
+    <TiForm v-bind="FormConfig" @change="api.onFormChange" />
   </div>
 </template>
 <style lang="scss">
