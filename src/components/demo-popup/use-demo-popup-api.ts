@@ -1,20 +1,19 @@
 import {
-  DataValidation,
   I18n,
   PopPosition,
   StrOptionItem,
   toPopPosition,
-  Vars
+  Vars,
 } from "@site0/tijs";
 import _ from "lodash";
 import { computed, ref } from "vue";
-import { DemoPopupEmitter, DemoPopupPayload, DemoPopupProps } from "./demo-popup-types";
+import {
+  DemoPopupEmitter,
+  DemoPopupPayload,
+  DemoPopupProps,
+} from "./demo-popup-types";
 
 export type DemoPopupApi = ReturnType<typeof useDemoPopupApi>;
-export type DemoPopupSetup = {
-  emit: DemoPopupEmitter,
-  getValidation?: () => DataValidation | undefined,
-}
 //-----------------------------------------------------
 export const _positions: PopPosition[] = [
   "left-top",
@@ -31,14 +30,14 @@ export const _positions: PopPosition[] = [
 
 export function useDemoPopupApi(
   props: DemoPopupProps,
-  setup: DemoPopupSetup
+  _emit: DemoPopupEmitter
 ) {
   //-----------------------------------------------------
   // 数据模型
   //-----------------------------------------------------
   const _data = ref<Vars>({
-    logicType: props.defaultType ?? 'primary',
-  })
+    logicType: props.defaultType ?? "primary",
+  });
   //-----------------------------------------------------
   // 计算属性
   //-----------------------------------------------------
@@ -46,16 +45,16 @@ export function useDemoPopupApi(
     if (props.title) {
       return I18n.text(props.title);
     }
-    return 'Demo Popup';
-  })
+    return "Demo Popup";
+  });
   //-----------------------------------------------------
   const PopupPositions = computed((): StrOptionItem[] => {
     let re: StrOptionItem[] = [];
     for (let pos of _positions) {
       re.push({
         value: pos,
-        text: _.upperCase(pos)
-      })
+        text: pos,
+      });
     }
     return re;
   });
@@ -63,13 +62,17 @@ export function useDemoPopupApi(
   // 操作函数
   //-----------------------------------------------------
   function onClick(it: StrOptionItem) {
-    console.log("click", it);
+    // console.log("click", it);
     let pos: PopPosition = toPopPosition(it.value);
     if (props.handler) {
       let payload: DemoPopupPayload = {
         pos,
-        ..._data.value,
-      }
+        logicType: _data.value.logicType,
+        more: _.omit(_data.value, "logicType"),
+      };
+      _.defaults(payload.more, {
+        conetnt: props.defaultContent,
+      });
       props.handler(payload);
     }
   }
@@ -83,7 +86,8 @@ export function useDemoPopupApi(
   // 返回接口
   //-----------------------------------------------------
   return {
-    // 计算属性
+    // 计算属,
+    Data: _data,
     Title,
     PopupPositions,
     // 操作函数

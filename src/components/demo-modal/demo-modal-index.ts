@@ -1,30 +1,29 @@
-import { TiComInfo, TiComRace } from '@site0/tijs';
-import { App } from 'vue';
-import DemoModal from './DemoModal.vue';
-import * as example from './example/index.ts';
+import { Alert, Confirm, Prompt, TiComInfo, TiComRace } from "@site0/tijs";
+import _ from "lodash";
+import { App } from "vue";
+import { DemoModalProps } from "./demo-modal-types.ts";
+import DemoModal from "./DemoModal.vue";
 
-const COM_TYPE = 'DemoModal';
+const COM_TYPE = "DemoModal";
 
 let en = {
-  'com-name': 'Demo Model',
-  'example-alert': 'Alert',
-  'example-confirm': 'Confirm',
-  'example-prompt': 'Prompt',
-  'example-process': 'Process',
+  "com-name": "Demo Model",
+  "example-alert": "Alert",
+  "example-confirm": "Confirm",
+  "example-prompt": "Prompt",
 };
 let cn = {
-  'com-name': '模式框演示',
-  'example-alert': '消息框',
-  'example-confirm': '确认框',
-  'example-prompt': '提示框',
-  'example-process': '进度框',
+  "com-name": "模式框演示",
+  "example-alert": "消息框",
+  "example-confirm": "确认框",
+  "example-prompt": "提示框",
 };
 
 const DemoModalInfo: TiComInfo = {
-  icon: 'far-clone',
+  icon: "far-clone",
   race: TiComRace.ACTION,
   name: COM_TYPE,
-  text: 'i18n:demo-modal-com-name',
+  text: "i18n:demo-modal-com-name",
   i18n: {
     en_us: en,
     en_uk: en,
@@ -35,13 +34,35 @@ const DemoModalInfo: TiComInfo = {
   install: (app: App) => {
     app.component(COM_TYPE, DemoModal);
   },
-  defaultProps: 'simple',
+  defaultProps: "alert",
   exampleProps: [
-    example.simple,
-    example.alerts,
-    example.confirms,
-    example.prompts,
-    example.process,
+    {
+      name: "alert",
+      text: "i18n:demo-modal-example-alert",
+      comConf: {
+        handler: (payload) => {
+          Alert(payload.content, _.omit(payload, "content"));
+        },
+      } as DemoModalProps,
+    },
+    {
+      name: "confirm",
+      text: "i18n:demo-modal-example-confirm",
+      comConf: {
+        handler: (payload) => {
+          Confirm(payload.content, _.omit(payload, "content"));
+        },
+      } as DemoModalProps,
+    },
+    {
+      name: "prompt",
+      text: "i18n:demo-modal-example-prompt",
+      comConf: {
+        handler: (payload) => {
+          Prompt(payload.content, _.omit(payload, "content"));
+        },
+      } as DemoModalProps,
+    },
   ],
 };
 

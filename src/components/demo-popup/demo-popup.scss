@@ -1,29 +1,41 @@
-@use '@site0/tijs/sass/_all.scss' as *;
+@use "@site0/tijs/sass/_all.scss" as *;
 
 .demo-popup {
-  padding: 1em;
+  padding: 0;
   user-select: none;
   //-----------------------------------------------------
-  > h4 {
+  @include flex-align-v-nowrap($ai: stretch);
+  gap: 0.3em;
+  //-----------------------------------------------------
+  .part-left {
+    padding: 0.5em;
+    background-color: var(--ti-color-border-shallow);
+  }
+  //-----------------------------------------------------
+  .part-left > h4 {
     padding: 0.2em;
     margin: 0;
     font-weight: normal;
     border-bottom: 1px solid var(--ti-color-shallow);
   }
   //-----------------------------------------------------
-  > main {
+  .part-left > main {
     font-size: var(--ti-fontsz-s);
     width: fit-content;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 0.4em;
-    padding: 0.3em;
+    gap: 1px;
+    padding: 0.1em;
     //---------------------------------------------------
     > a {
       @include flex-center;
-      padding: 0.5em;
-      border: 1px solid var(--ti-color-border-thin);
-      border-radius: 0.3em;
+      padding: 0 0.3em;
+      line-height: 1.8em;
+      border: 1px solid var(--border);
+      border-radius: var(--ti-measure-r-s);
+      color: var(--color);
+      background-color: var(--bg);
+      white-space: nowrap;
     }
     //---------------------------------------------------
   }
